@@ -11,6 +11,7 @@ title: No laptop? No problem! Coding on Gitpod for Hacktoberfest 2022
 
 <script context="module">
   export const prerender = true;
+  import Tweet from "$lib/components/blog/tweet.svelte";
 </script>
 
 Hello, fellow coder!👋
@@ -27,8 +28,18 @@ Within Gitpod, you can contribute to all of your favorite Open Source repos:
 
 Yes... even coding in a Tesla 😎
 
-<img style="display: inline" width="49%" src="https://user-images.githubusercontent.com/5528307/172395060-4df48795-0c76-4de5-8014-4a2883fe7feb.png" />
-<img style="display: inline" width="49%" src="https://user-images.githubusercontent.com/5528307/172392182-2a867196-31a8-46cb-be24-850e052226c0.png" />
+<div class="flex gap-4">
+  <span class="flex-1">
+    <Tweet  link="https://twitter.com/philmaegel/status/1484284562976948230">
+      Why code on a MacBook if you can code in your car's browser with @gitpod 🚗 🤓
+    </Tweet>
+  </span>
+  <span class="flex-1">
+    <Tweet link="https://twitter.com/molly_struve/status/1533920920045342720">
+      No. Just no.
+    </Tweet>
+  </span>
+</div>
 
 <br>
 
