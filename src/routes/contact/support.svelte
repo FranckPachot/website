@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import type { Form } from "$lib/types/form.type";
+  import type { Form } from "$lib/types/form";
   import type { Email } from "$lib/api/api";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import SubmissionSuccess from "$lib/components/submission-success.svelte";
@@ -36,6 +36,7 @@
     studentUnlimitedSubject,
     selfHostingSubject,
     "Open Source Sponsorship",
+    "Security",
     otherSubject,
   ];
 

@@ -1,5 +1,12 @@
 import fs from "fs";
 import { Octokit } from "octokit";
+import { paginateGraphql } from "@octokit/plugin-paginate-graphql";
+import minimist from "minimist";
+import { getMonthBoundaries } from "./lib/dates.js";
+
+const argv = minimist(process.argv.slice(2));
+
+const OctokitWithPlugins = Octokit.plugin(paginateGraphql);
 
 const sayHello = async (octokit) => {
   const {
@@ -12,6 +19,28 @@ const sayHello = async (octokit) => {
   console.log("Hello, %s\r\n", login);
 };
 
+const replaceContentOfBlock = (blockName, blockContent, fileContent) => {
+  const startingLine = `<!--- BEGIN_${blockName} -->`;
+  const endingLine = `<!--- END_${blockName} -->`;
+
+  const startingLineIndex = fileContent.indexOf(startingLine);
+  const endingLineIndex = fileContent.indexOf(endingLine);
+
+  if (startingLineIndex === -1 || endingLineIndex === -1) {
+    throw new Error(
+      `Could not find ${startingLine} and/or ${endingLine} in the changelog file`
+    );
+  }
+
+  const newContent = [
+    fileContent.slice(0, startingLineIndex + startingLine.length),
+    blockContent,
+    fileContent.slice(endingLineIndex),
+  ].join("\r\n");
+
+  return newContent;
+};
+
 const getParticipants = (pr) =>
   pr.participants.nodes
     .map(({ login }) => login)
@@ -20,17 +49,13 @@ const getParticipants = (pr) =>
     .join(",");
 
 const parseReleaseNote = (pr) => {
-  // For some reason, the multi-line regex doesn't work. We remove all new line
-  // characters and match against the one-line string instead.
-  const releaseNoteMatch = pr.body
-    .replace(/\r\n/g, "")
-    .match(/```release-notes?(.+?)```/);
-  if (!releaseNoteMatch || releaseNoteMatch[1].trim().toUpperCase() === "NONE")
+  const releaseNoteMatch = pr.body.match(/```release-notes?(.+?)```/s);
+  const releaseNoteContent = releaseNoteMatch && releaseNoteMatch[1].trim();
+  if (!releaseNoteMatch || releaseNoteContent.toUpperCase() === "NONE") {
     return;
-  return releaseNoteMatch[1];
+  }
+  return releaseNoteContent;
 };
-
-const hasReleaseNote = (pr) => !!parseReleaseNote(pr);
 
 const generatePrChangelogLine = (pr) =>
   `- [#${pr.number}](${pr.url}) - ${parseReleaseNote(
@@ -38,21 +63,11 @@ const generatePrChangelogLine = (pr) =>
   )} <Contributors usernames="${getParticipants(pr)}" />\r\n`;
 
 const main = async () => {
-  if (process.argv.length !== 5) {
-    console.error(
-      "Usage: node ./scripts/generate-changelog.js [release-date] [from] [to]"
-    );
-    console.error("");
-    console.error(
-      "Example: node ./scripts/generate-changelog.js 2022-01-17 2022-01-10 2022-01-15"
-    );
-    process.exit(1);
-  }
-  const releaseDate = process.argv[2];
-  const from = process.argv[3];
-  const to = process.argv[4];
-  const searchQuery = `repo:gitpod-io/gitpod is:pr is:merged merged:${from}..${to} sort:updated-desc`;
-
+  const [firstBusinessDay, lastBusinessDay] = getMonthBoundaries();
+  const releaseDate = argv._[0] || lastBusinessDay;
+  const from = argv._[1] || firstBusinessDay;
+  const to = argv._[2] || lastBusinessDay;
+  const searchQuery = `repo:gitpod-io/gitpod is:pr is:merged merged:${from}..${to} sort:updated-desc label:deployed -label:release-note-none -project:gitpod-io/22`;
   if (!process.env.CHANGELOG_GITHUB_ACCESS_TOKEN) {
     console.warn(
       "Please provide a GitHub personal access token via a `CHANGELOG_GITHUB_ACCESS_TOKEN` environment variable."
@@ -63,17 +78,15 @@ const main = async () => {
     process.exit(1);
   }
 
-  const octokit = new Octokit({
+  const octokit = new OctokitWithPlugins({
     auth: process.env.CHANGELOG_GITHUB_ACCESS_TOKEN,
   });
   await sayHello(octokit);
 
-  console.log(
-    `repo:gitpod-io/gitpod is:pr is:merged merged:${from}..${to} sort:updated-desc`
-  );
-  const { search } = await octokit.graphql(
-    `query($searchQuery:String!) {
-    search(query: $searchQuery, type: ISSUE, last: 100) {
+  console.log(searchQuery);
+  const { search } = await octokit.graphql.paginate(
+    `query paginate($cursor: String) {
+    search(query: "${searchQuery}", type: ISSUE, last: 50, after: $cursor) {
       edges {
         node {
           ... on PullRequest {
@@ -84,29 +97,37 @@ const main = async () => {
                 login
               }
             }
+            labels (first: 50) {
+              nodes {
+                name
+              }
+            }
             url
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
-  }`,
-    {
-      searchQuery,
-    }
+  }`
   );
 
   const fixesAndImprovements = search.edges
     .map((edge) => edge.node)
-    // .filter(pr => pr.number === 7609) // Helps with testing
-    .filter(hasReleaseNote)
+    // We filter any PRs that don't have a release note but also don't have the `release-note-none` label. This is a bug with @roboquat and after it is fixed, this should be removed.
+    .filter(parseReleaseNote)
     .map(generatePrChangelogLine)
-    .filter((identity) => identity)
     .join("");
 
-  fs.copyFileSync(
-    "./src/lib/contents/changelog/_template.md",
-    `./src/lib/contents/changelog/${releaseDate}.md`
-  );
+  try {
+    fs.copyFileSync(
+      "./src/lib/contents/changelog/_template.md",
+      `./src/lib/contents/changelog/${releaseDate}.md`,
+      fs.constants.COPYFILE_EXCL
+    );
+  } catch {} // don't copy if file already exists
   let newChangelogFileContent = fs.readFileSync(
     `./src/lib/contents/changelog/${releaseDate}.md`,
     "utf-8"
@@ -115,10 +136,22 @@ const main = async () => {
     /{{releaseDate}}/g,
     releaseDate
   );
-  newChangelogFileContent = newChangelogFileContent.replace(
-    /{{fixesAndImprovements}}/,
-    fixesAndImprovements
+  newChangelogFileContent = replaceContentOfBlock(
+    "AUTOGENERATED_CHANGES",
+    fixesAndImprovements,
+    newChangelogFileContent
   );
+
+  if (argv.dryRun) {
+    console.log("========================================");
+    if (argv.onlyPrs) {
+      console.log(fixesAndImprovements);
+      process.exit(0);
+    }
+    console.log(newChangelogFileContent);
+    process.exit(0);
+  }
+
   fs.writeFileSync(
     `./src/lib/contents/changelog/${releaseDate}.md`,
     newChangelogFileContent

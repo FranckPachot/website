@@ -5,8 +5,7 @@
   import "$lib/assets/markdown-commons.scss";
   import Share from "$lib/components/share.svelte";
   import Pill from "./pill.svelte";
-  import type { ShareLink } from "$lib/types/share-link.type";
-  import Hackernews from "./svgs/share/hackernews.svelte";
+  import type { ShareLink } from "$lib/types/share-link";
   import RequestChanges from "./ui-library/request-changes.svelte";
 
   export let baseUrl: string;
@@ -73,7 +72,10 @@
       href: `http://news.ycombinator.com/submitlink?u=${encodeURIComponent(
         `${baseUrl}${slug}`
       )}&t=${encodeURIComponent(title)}`,
-      svg: Hackernews,
+      icon: {
+        src: "/svg/brands/hackernews.svg",
+        alt: "HackerNews",
+      },
       trackingName: "hackernews",
     },
   ];
@@ -106,7 +108,7 @@
       class="max-h-[540px] rounded-tl-2xl rounded-tr-[1.3rem]"
     />
     <div
-      class="content-blog prose prose-img:rounded-tl-2xl prose-img:rounded-tr-[1.3rem] max-w-none mt-10"
+      class="content-blog prose prose-img:rounded-tl-2xl prose-img:rounded-tr-[1.3rem] max-w-none mt-xx-small"
     >
       <p class="mt-[1.875rem] mb-6 text-body">{dateDisplay}</p>
       {#if type === "digest"}

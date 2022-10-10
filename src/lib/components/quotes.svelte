@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Quote } from "$lib/types/quote.type";
+  import type { Quote } from "$lib/types/quote";
   import Card from "$lib/components/ui-library/card";
   export let quotes: Quote[];
   let selectedQuote: Quote = quotes[0];
   import LinkButton from "$lib/components/ui-library/link-button";
   import { onMount } from "svelte";
-  import { fly, scale } from "svelte/transition";
+  import { fade, scale } from "svelte/transition";
 
   let clazz = "";
   export { clazz as class };
@@ -97,7 +97,7 @@
         </div>
         <div
           class="text flex w-full md:w-1/2 justify-center flex-col flex-1 px-xx-small py-xx-small md:py-0 sm:pl-x-small lg:pl-small lg:pr-0"
-          in:fly={{ x: 50, duration: 1000 }}
+          in:fade={{ delay: 100 }}
         >
           <p class="text-large">
             &ldquo;{selectedQuote.text}&rdquo;

@@ -1,10 +1,10 @@
-import type { Card } from "$lib/types/card.type";
-import type { Intro } from "$lib/types/intro.type";
+import type { Card } from "$lib/types/card";
+import type { Intro } from "$lib/types/intro";
 import type {
   FeatureTable,
   FeatureTableColumn,
   FeatureTableToc,
-} from "../components/ui-library/feature-table/feature-table.types";
+} from "../components/ui-library/feature-table/feature-table";
 import logoSvelte from "$lib/components/svgs/logo.svelte";
 
 export const benefits: Card[] = [
@@ -164,14 +164,14 @@ export const aliceTableData: FeatureTableColumn = {
           term: "Develop a new feature",
           list: [
             "opens new browser tab",
-            'prefixes the issue URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
+            'prefixes the issue URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/configure/user-settings/browser-extension">browser extension</a>',
           ],
         },
         {
           term: "Switch context",
           list: [
             "opens new browser tab",
-            'prefixes the PR URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
+            'prefixes the PR URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/configure/user-settings/browser-extension">browser extension</a>',
             "reviews code within Gitpod",
             "closes browser tab",
           ],

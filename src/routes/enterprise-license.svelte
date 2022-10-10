@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import type { Form } from "$lib/types/form.type";
+  import type { Form } from "$lib/types/form";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Textarea from "$lib/components/ui-library/textarea";
   import Input from "$lib/components/ui-library/input";
@@ -199,7 +199,7 @@
           : "Thanks for your request, we'll be in touch shortly."}
         text={toType === "community-license"
           ? "We've just sent you your license key via email. Enjoy!"
-          : "Check out the Self-Hosted <a href='/docs/self-hosted/latest/getting-started'>getting started guide</a>."}
+          : "Check out the Self-Hosted <a href='/docs/configure/self-hosted/latest/getting-started'>getting started guide</a>."}
       />
     {:else}
       <form bind:this={form} on:submit|preventDefault={handleSubmit} novalidate>

@@ -1,13 +1,13 @@
-import type { Feature } from "$lib/types/feature.type";
+import type { Feature } from "$lib/types/feature";
 import {
   codeAnywhereFeature,
   collaborationFeature,
   multiTrackDevelopmentFeature,
 } from "./home/features";
-import type { ExploreSection } from "$lib/types/explore-section.type";
+import type { ExploreSection } from "$lib/types/explore-section";
 import { terminalSource } from "./terminal";
-import type { Card } from "$lib/types/card.type";
-import type { FAQ } from "../types/faq.type";
+import type { Card } from "$lib/types/card";
+import type { FAQ } from "../types/faq";
 
 export const features: Feature[] = [
   {
@@ -79,7 +79,7 @@ export const faqs: FAQ = {
     {
       title: "Are both SaaS and the Self-Hosted option part of the program?",
       content:
-        'We are happy to manage Gitpod for you to let you focus on the important things, but if you want to <a href="/docs/self-hosted/latest">self-host</a> on your infrastructure, that\'s possible too, without user limit.',
+        'We are happy to manage Gitpod for you to let you focus on the important things, but if you want to <a href="/docs/configure/self-hosted/latest">self-host</a> on your infrastructure, that\'s possible too, without user limit.',
     },
     {
       title:
