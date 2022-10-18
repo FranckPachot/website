@@ -1,151 +1,240 @@
-import type { MenuEntry } from "$lib/types/menu-entry.type";
+import type { MenuEntry } from "$lib/types/menu-entry";
 import { M } from "../menu";
 
-const version = "";
-
 export const MENU: MenuEntry[] = [
-  M(`Introduction`, `${version}`),
-  M(`Quickstart`, `${version}quickstart`),
-  M(`Getting Started`, `${version}getting-started`),
-  M(`Configure`, `${version}configure`, [
-    M(`.gitpod.yml`, `${version}config-gitpod-file`),
-    // Why is this side bar name different to the title / URL?
-    M(`Docker`, `${version}config-docker`),
-    M(`Start Tasks`, `${version}config-start-tasks`),
-    M(`Ports`, `${version}config-ports`),
-    M(`Prebuilds`, `${version}prebuilds`),
-    M(`Environment Variables`, `${version}environment-variables`),
-    M(`Network Bridging`, `${version}configure/tailscale`),
-    M(`Workspace Location`, `${version}checkout-location`),
-    M(`Browser Settings`, `${version}configure/browser-settings`),
-    M(`Dotfiles`, `${version}config-dotfiles`, []),
-    M(`SSH`, `${version}configure/ssh`),
-    M(`Multi-Repo`, `${version}multi-repo-workspaces`, [], `beta`),
-    M(`Workspace Classes`, `${version}workspace-classes`, [], `Early Access`),
+  M("Introduction", "introduction", true),
+  M("Getting started", "introduction/getting-started", false, [
+    M("Quickstart", "introduction/getting-started/quickstart"),
   ]),
-  M(`Develop`, `${version}develop`, [
-    M(`One workspace per task`, `${version}workspaces`),
-    M(`Life of a workspace`, `${version}life-of-workspace`),
-    M(`Contexts`, `${version}context-urls`),
-    M(`Collaboration & Sharing`, `${version}sharing-and-collaboration`),
-    M(`Teams & Projects`, `${version}teams-and-projects`, [], `beta`),
-    M(`Team Billing`, `${version}team-billing`, [], `beta`),
+  M("Learn Gitpod", "introduction/learn-gitpod", false, [
     M(
-      `Usage-based Billing`,
-      `${version}usage-based-billing`,
+      "One workspace per task",
+      "introduction/learn-gitpod/one-workspace-per-task"
+    ),
+    M(
+      "The life of a workspace",
+      "introduction/learn-gitpod/the-life-of-a-workspace"
+    ),
+    M("Context URL", "introduction/learn-gitpod/context-url"),
+    M(".gitpod.yml", "introduction/learn-gitpod/gitpod-yaml"),
+  ]),
+  M("Languages", "introduction/languages", false, [
+    M("JavaScript", "introduction/languages/javascript"),
+    M("Python", "introduction/languages/python"),
+    M("Java", "introduction/languages/java"),
+    M("Go", "introduction/languages/go"),
+    M("Rust", "introduction/languages/rust"),
+  ]),
+
+  M("Configure", "configure", true),
+
+  M("Workspaces", "configure/workspaces", false, [
+    M("Workspace Image", "configure/workspaces/workspace-image"),
+    M("Tasks", "configure/workspaces/tasks"),
+    M("Ports", "configure/workspaces/ports"),
+    M("Collaboration", "configure/workspaces/collaboration", false, []),
+    M("Multi-repo", "configure/workspaces/multi-repo", false, [], "beta"),
+    M(
+      "Workspace classes",
+      "configure/workspaces/workspace-classes",
+      false,
       [],
-      `Early Access`
+      "Early Access"
     ),
-    M(`Team Plans`, `${version}teams`, []),
   ]),
-  M(`IDEs & Editors`, `${version}ides-and-editors`, [
-    M(`VS Code Browser`, `${version}ides-and-editors/vscode-browser`),
-    M(`VS Code Desktop`, `${version}ides-and-editors/vscode`, [], `beta`),
-    M(`IntelliJ IDEA`, `${version}ides-and-editors/intellij`, [], `beta`),
-    M(`GoLand`, `${version}ides-and-editors/goland`, [], `beta`),
-    M(`PhpStorm`, `${version}ides-and-editors/phpstorm`, [], `beta`),
-    M(`PyCharm`, `${version}ides-and-editors/pycharm`, [], `beta`),
-    M(`CLion`, `${version}ides-and-editors/clion`, [], `soon`),
-    M(`Rider`, `${version}ides-and-editors/rider`, [], `soon`),
-    M(`RubyMine`, `${version}ides-and-editors/rubymine`, [], `soon`),
-    M(`WebStorm`, `${version}ides-and-editors/webstorm`, [], `soon`),
+
+  M("User settings", "configure/user-settings", false, [
+    M("Browser extension", "configure/user-settings/browser-extension"),
+    M("Browser settings", "configure/user-settings/browser-settings"),
+    M("Browser bookmarklet", "configure/user-settings/browser-bookmarklet"),
+    M("Dotfiles", "configure/user-settings/dotfiles", false, []),
+    M("SSH", "configure/user-settings/ssh"),
+  ]),
+
+  M(
+    "Projects",
+    "configure/projects",
+    false,
+    [
+      // Why is this side bar name different to the title / URL?
+      M("Prebuilds", "configure/projects/prebuilds"),
+      M("Environment Variables", "configure/projects/environment-variables"),
+    ],
+    "beta"
+  ),
+
+  M("Teams", "configure/teams", false, [], "beta"),
+
+  M("Authentication", "configure/authentication", false, [
+    M("GitLab", "configure/authentication/gitlab"),
+    M("GitHub", "configure/authentication/github"),
+    M("Bitbucket", "configure/authentication/bitbucket"),
+    M("GitHub Enterprise", "configure/authentication/github-enterprise"),
+    M("Bitbucket Server", "configure/authentication/bitbucket-server"),
+  ]),
+  M("Self-Hosted", "configure/self-hosted/latest", false, [
     M(
-      `Local Companion`,
-      `${version}ides-and-editors/local-companion`,
+      "Installation Guides",
+      "configure/self-hosted/latest/installation-guides",
+      false,
+      [
+        M(
+          "Local Preview",
+          "configure/self-hosted/latest/local-preview",
+          false,
+          [],
+          "alpha"
+        ),
+        M(
+          "Installing Gitpod",
+          "configure/self-hosted/latest/installing-gitpod"
+        ),
+        M(
+          "Reference Architectures",
+          "configure/self-hosted/latest/reference-architecture",
+          false,
+          [],
+          "alpha"
+        ),
+        M(
+          "Advanced Installation",
+          "configure/self-hosted/latest/advanced",
+          false
+        ),
+      ]
+    ),
+    M(
+      "Operational Guides",
+      "configure/self-hosted/latest/operational-guides",
+      false,
+      [
+        M("Updating", "configure/self-hosted/latest/updating"),
+        M("Monitoring", "configure/self-hosted/latest/monitoring"),
+        M(
+          "Workspace resources",
+          "configure/self-hosted/latest/configuring-workspace-resources"
+        ),
+        M("Backing Up", "configure/self-hosted/latest/backup-restore"),
+      ]
+    ),
+    M(
+      "Troubleshooting",
+      "configure/self-hosted/latest/troubleshooting",
+      false,
+      [
+        M(
+          "Support Bundles",
+          "configure/self-hosted/latest/support-bundle",
+          false,
+          []
+        ),
+        M(
+          "Config Patches",
+          "configure/self-hosted/latest/config-patches",
+          false,
+          []
+        ),
+        M(
+          "Stop Workspaces",
+          "configure/self-hosted/latest/stop-workspaces",
+          false,
+          []
+        ),
+        M(
+          "Prevent Workspace Starts",
+          "configure/self-hosted/latest/prevent-workspace-starts"
+        ),
+        M(
+          "Manage Cluster Nodes",
+          "configure/self-hosted/latest/manage-cluster-nodes",
+          false,
+          []
+        ),
+      ]
+    ),
+    M("Background", "configure/self-hosted/latest/background", false, [
+      M("Disaster Recovery", "configure/self-hosted/latest/disaster-recovery"),
+    ]),
+    M("Reference", "configure/self-hosted/latest/reference", false, [
+      M("Requirements", "configure/self-hosted/latest/requirements"),
+      M("Compatibility", "references/compatibility?admin"),
+      M("Telemetry", "configure/self-hosted/latest/telemetry"),
+      M("Release Policies", "configure/self-hosted/latest/releases"),
+      M("Upgrade Guides", "configure/self-hosted/latest/upgrade-guides"),
+    ]),
+  ]),
+  M("Billing", "configure/billing", false, [
+    // M("Subscriptions", "configure/billing/subscriptions"),
+    M("Personal plans", "configure/billing/personal-plans"),
+    M("Team plans", "configure/billing/team-plans"),
+    M("Team billing", "configure/billing/team-billing", false, [], "beta"),
+    M(
+      "Usage-based billing",
+      "configure/billing/usage-based-billing",
+      false,
       [],
-      `beta`
+      "Early Access"
     ),
+  ]),
+
+  M("References", "references", true),
+  M(".gitpod.yml", "references/gitpod-yml"),
+  M("IDEs & editors", "references/ides-and-editors", false, [
+    M("VS Code Browser", "references/ides-and-editors/vscode-browser"),
     M(
-      `JetBrains Gateway`,
-      `${version}ides-and-editors/jetbrains-gateway`,
+      "VS Code Desktop",
+      "references/ides-and-editors/vscode",
+      false,
       [],
-      `beta`
+      "beta"
     ),
-    M(`VS Code Extensions`, `${version}ides-and-editors/vscode-extensions`),
-    M(`VS Code Settings Sync`, `${version}ides-and-editors/settings-sync`),
-    M(`Command Line (SSH)`, `${version}ides-and-editors/command-line`, []),
-    M(`FAQs`, `${version}ides-and-editors/faqs`, []),
-  ]),
-  M(`Languages`, `${version}languages`, [
-    M(`JavaScript`, `${version}languages/javascript`),
-    M(`Python`, `${version}languages/python`),
-    M(`HTML/CSS`, `${version}languages/html`),
-    M(`Java`, `${version}languages/java`),
-    M(`C++`, `${version}languages/cpp`),
-    M(`Go`, `${version}languages/go`),
-    M(`Ruby`, `${version}languages/ruby`),
-    M(`PHP`, `${version}languages/php`),
-    M(`Vue`, `${version}languages/vue`),
-    M(`Scala`, `${version}languages/scala`),
-    M(`Rust`, `${version}languages/rust`),
-    M(`.NET`, `${version}languages/dotnet`),
-    M(`Dart`, `${version}languages/dart`),
-    M(`Julia`, `${version}languages/julia`),
-    M(`LaTeX`, `${version}languages/latex`),
-    M(`R`, `${version}languages/r`),
-    M(`Kotlin`, `${version}languages/kotlin`),
-    M(`Deno`, `${version}languages/deno`),
-  ]),
-  M(`Integrations`, `${version}integrations`, [
-    M(`GitLab`, `${version}gitlab-integration`),
-    M(`GitHub`, `${version}github-integration`),
-    M(`Bitbucket`, `${version}bitbucket-integration`),
-    M(`GitHub Enterprise`, `${version}github-enterprise-integration`),
-    M(`Bitbucket Server`, `${version}bitbucket-server-integration`),
-    M(`Browser Bookmarklet`, `${version}browser-bookmarklet`),
-    M(`Browser Extension`, `${version}browser-extension`),
-  ]),
-  M(`Gitpod Self-Hosted`, `${version}self-hosted`, [
-    M(`Installation Guides`, `${version}self-hosted/installation-guides`, [
-      M(`Local Preview`, `${version}self-hosted/local-preview`, [], `beta`),
-      M(
-        `Reference Architectures`,
-        `${version}self-hosted/reference-architecture`,
-        []
-      ),
-      M(`Installing Gitpod`, `${version}self-hosted/installing-gitpod`),
-      M(`Advanced Installation`, `${version}self-hosted/advanced`),
-    ]),
-    M(`Operational Guides`, `${version}self-hosted/operational-guides`, [
-      M(`Updating`, `${version}self-hosted/updating`),
-      M(`Monitoring`, `${version}self-hosted/monitoring`),
-      M(`Backing Up`, `${version}self-hosted/backup-restore`),
-    ]),
-    M(`Troubleshooting`, `${version}self-hosted/troubleshooting`, [
-      M(`Support Bundles`, `${version}self-hosted/support-bundle`, []),
-      M(`Config Patches`, `${version}self-hosted/config-patches`, []),
-    ]),
-    M(`Background`, `${version}self-hosted/background`, [
-      M(`Disaster Recovery`, `${version}self-hosted/disaster-recovery`),
-    ]),
-    M(`Reference`, `${version}self-hosted/reference`, [
-      M(`Required Components`, `${version}self-hosted/required-components`),
-      M(`Cluster Requirements`, `${version}self-hosted/cluster-requirements`),
-      M(
-        `Compatibility Matrix`,
-        `${version}references/product-compatibility-matrix?admin`
-      ),
-      M(`Telemetry`, `${version}self-hosted/telemetry`),
-      M(`Release Policies`, `${version}self-hosted/releases`),
-      M(`Upgrade Guides`, `${version}self-hosted/upgrade-guides`),
-    ]),
-  ]),
-  M(`References`, `${version}references`, [
     M(
-      `Compatibility Matrix`,
-      `${version}references/product-compatibility-matrix?user`
+      "IntelliJ IDEA",
+      "references/ides-and-editors/intellij",
+      false,
+      [],
+      "beta"
     ),
-    M(`.gitpod.yml`, `${version}references/gitpod-yml`),
-    M(`Command Line Interface`, `${version}command-line-interface`),
-    // M(`Custom Docker image`, `references/gitpod-dockerfile`),
-    // M(`Architecture`, `references/architecture`),
-    M(`Roadmap`, `${version}references/roadmap`),
-    M(`Gitpod Releases`, `${version}references/gitpod-releases`),
+    M("GoLand", "references/ides-and-editors/goland", false, [], "beta"),
+    M("PhpStorm", "references/ides-and-editors/phpstorm", false, [], "beta"),
+    M("PyCharm", "references/ides-and-editors/pycharm", false, [], "beta"),
+    M("CLion", "references/ides-and-editors/clion", false, [], "soon"),
+    M("Rider", "references/ides-and-editors/rider", false, [], "soon"),
+    M("RubyMine", "references/ides-and-editors/rubymine", false, [], "beta"),
+    M("WebStorm", "references/ides-and-editors/webstorm", false, [], "beta"),
+    M(
+      "Local Companion",
+      "references/ides-and-editors/local-companion",
+      false,
+      [],
+      "beta"
+    ),
+    M("VS Code extensions", "references/ides-and-editors/vscode-extensions"),
+    M("VS Code settings sync", "references/ides-and-editors/settings-sync"),
+    M(
+      "Command Line (SSH)",
+      "references/ides-and-editors/command-line",
+      false,
+      []
+    ),
+    M("FAQs", "references/ides-and-editors/faqs", false, []),
   ]),
-  M(`Contribute`, `${version}contribute`, [
-    M(`Content`, `${version}contribute/content`),
-    M(`Documentation`, `${version}contribute/documentation`),
-    M(`Features & Patches`, `${version}contribute/features-and-patches`),
+  M("Integrations", "integrations", false, [
+    M("Tailscale", "integrations/tailscale"),
+    M("JetBrains Gateway", "integrations/jetbrains-gateway", false, [], "beta"),
   ]),
-  M(`Troubleshooting`, `${version}troubleshooting`, []),
+  M("Gitpod CLI", "references/gitpod-cli"),
+  M("Compatibility", "references/compatibility?user"),
+  // M("Custom Docker image", "references/gitpod-dockerfile"),
+  // M("Architecture", "references/architecture"),
+  M("Help", "help", true),
+  M("Contribute", "help/contribute", false, [
+    M("Content", "help/contribute/content"),
+    M("Documentation", "help/contribute/documentation"),
+    M("Features & Patches", "help/contribute/features-and-patches"),
+  ]),
+  M("Public roadmap", "help/public-roadmap", false, [
+    M("Release cycle", "help/public-roadmap/release-cycle"),
+  ]),
+  M("Troubleshooting", "help/troubleshooting", false, []),
 ];
