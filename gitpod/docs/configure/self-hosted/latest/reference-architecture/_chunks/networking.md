@@ -246,9 +246,10 @@ helm upgrade \
     --namespace cert-manager \
     --reset-values \
     --set installCRDs=true \
+    --set 'extraArgs={--dns01-recursive-nameservers-only=true,--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}' \
     --set webhook.hostNetwork=true \
-    --set serviceAccount.create=false \
     --set webhook.securePort=10260 \
+    --set serviceAccount.create=false \
     --set serviceAccount.name=cert-manager \
     --wait \
     cert-manager \
@@ -321,26 +322,31 @@ kubectl apply -f issuer.yaml
 If using `eksctl` and the cert-manager service account along with well-known policies AND you have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example cluster issuer using the hosted zone and cert-manager service account created by `eksctl` is below:
 
 ```yaml
+# Replace $LETSENCRYPT_EMAIL with your email and $DOMAIN_NAME with your gitpod domain name (eg.`gitpod.$DOMAIN_NAME`)
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: gitpod-issuer
-  namespace: cert-manager
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: "email@gitpod.example.com"
+    email: $LETSENCRYPT_EMAIL
     privateKeySecretRef:
       name: letsencrypt
     solvers:
       - selector:
           dnsZones:
-            - "gitpod.example.com"
+            - $DOMAIN_NAME
         dns01:
           route53:
             region: us-east-1
-            hostedZoneID: Z1230498123094
 ```
+
+> ⚠️ In contrast to most AWS services, Route53 does _not_ support regional endpoints. When creating your ClusterIssuer
+> be careful to use the `us-east-1` region for all regions other than the Beijing and Ningxia Regions, and `cn-northwest-1`
+> region for the Beijing and Ningxia regions.
+>
+> See the [AWS Route53 endpoints and quotas documentation](https://docs.aws.amazon.com/general/latest/gr/r53.html) for more information.
 
 </div>
 </CloudPlatformToggle>

@@ -6,17 +6,21 @@ layout: false
   import CloudPlatformToggle from "$lib/components/docs/cloud-platform-toggle.svelte";
 </script>
 
-The heart of this reference architecture is a **Kubernetes cluster** where all Gitpod components are deployed to. This cluster consists of two node pools:
+The heart of this reference architecture is a **Kubernetes cluster** where all Gitpod components are deployed to. This cluster consists of three node pools:
 
 1. **Services Node Pool**: The Gitpod “app” with all its services is deployed to these nodes. These services provide the users with the dashboard and manage the provisioning of workspaces.
-2. **Workspaces Node Pool**: Gitpod deploys the actual workspaces (where the actual develooper work is happening) to these nodes. Because workspaces have vastly differing resource and security isolation requirements compared to Gitpod’s own services, they run on a dedicated node pool.
+2. **Regular Workspaces Node Pool**: Gitpod deploys the actual workspaces (where the actual developer work is happening) to these nodes.
+3. **Headless Workspace Node Pool**: Gitpod deploys the imagebuild and prebuild workspaces (where build work generally demands more CPU and disk) to these needs.
+
+Gitpod services, headless, and regular workspaces have vastly differing resource and isolation requirements. These workloads are separated onto different node pools to provide a better quality of service and security guarantees.
 
 You need to assign the following labels to the node pools to enforce that the Gitpod components are scheduled to the proper node pools:
 
-| Node Pool            | Labels                                                                                                                                          |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Services Node Pool   | `gitpod.io/workload_meta=true`,<br/>`gitpod.io/workload_ide=true`                                                                               |
-| Workspaces Node Pool | `gitpod.io/workload_workspace_services=true`,<br/>`gitpod.io/workload_workspace_regular=true`,<br/>`gitpod.io/workload_workspace_headless=true` |
+| Node Pool                    | Labels                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Services Node Pool           | `gitpod.io/workload_meta=true`,<br/>`gitpod.io/workload_ide=true`,<br/>`gitpod.io/workload_workspace_services=true` |
+| Regular Workspace Node Pool  | `gitpod.io/workload_workspace_regular=true`                                                                         |
+| Headless Workspace Node Pool | `gitpod.io/workload_workspace_headless=true`                                                                        |
 
 The following table gives an overview of the node types for the different cloud providers that are used by this reference architecture.
 
@@ -71,7 +75,7 @@ After that, we [create a **Kubernetes cluster**](https://cloud.google.com/kubern
 ```bash
 CLUSTER_NAME=gitpod
 REGION=us-central1
-GKE_VERSION=1.21.11-gke.900
+GKE_VERSION=1.22.12-gke.1200
 
 gcloud container clusters \
     create "${CLUSTER_NAME}" \
@@ -144,7 +148,7 @@ gcloud container node-pools \
     --region="${REGION}"
 ```
 
-We are also creating a **node pool for the Gitpod workspaces**.
+We are also creating a **node pool for the Gitpod regular workspaces**.
 
 |                   |                                                                                     |
 | ----------------- | ----------------------------------------------------------------------------------- |
@@ -163,7 +167,7 @@ We are also creating a **node pool for the Gitpod workspaces**.
 
 ```bash
 gcloud container node-pools \
-    create "workload-workspaces" \
+    create "workload-regular-workspaces" \
     --cluster="${CLUSTER_NAME}" \
     --disk-type="pd-ssd" \
     --disk-size="512GB" \
@@ -309,6 +313,11 @@ iam:
         namespace: cert-manager
       wellKnownPolicies:
         certManager: true
+    - metadata:
+        name: external-dns
+        namespace: external-dns
+      wellKnownPolicies:
+        externalDNS: true
 
 # Uncomment and update for your region if you wish to use fewer availability zones
 # availabilityZones:
@@ -379,13 +388,14 @@ managedNodeGroups:
     labels:
       gitpod.io/workload_meta: "true"
       gitpod.io/workload_ide: "true"
+      gitpod.io/workload_workspace_services: "true"
 
     preBootstrapCommands:
       - echo "export USE_MAX_PODS=false" >> /etc/profile.d/bootstrap.sh
       - echo "export CONTAINER_RUNTIME=containerd" >> /etc/profile.d/bootstrap.sh
       - sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
 
-  - name: workspaces
+  - name: regular-workspaces
     amiFamily: Ubuntu2004
     spot: false
     instanceTypes: ["m6i.4xlarge"]
@@ -606,7 +616,8 @@ This should result in:
 
 ```bash
 2022-06-24 13:42:01 [ℹ]  nodegroup "services" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
-2022-06-24 13:42:01 [ℹ]  nodegroup "workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:42:01 [ℹ]  nodegroup "regular-workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:42:01 [ℹ]  nodegroup "headless-workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
 2022-06-24 13:42:03 [ℹ]  combined include rules: services
 2022-06-24 13:42:03 [ℹ]  1 nodegroup (services) was included (based on the include/exclude rules)
 2022-06-24 13:42:03 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gitpod"
@@ -616,21 +627,22 @@ This should result in:
 2022-06-24 13:46:24 [ℹ]  all nodegroups have up-to-date cloudformation templates
 ```
 
-Create the workspaces nodegroup second if the services are deployed correctly.
+Create the workspaces nodegroups second if the services are deployed correctly.
 
 ```bash
-eksctl create nodegroup --include=workspaces --config-file gitpod-cluster.yaml
+eksctl create nodegroup --include=regular-workspaces,headless-workspaces --config-file gitpod-cluster.yaml
 ```
 
 ```bash
 2022-06-24 13:55:08 [ℹ]  nodegroup "services" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
-2022-06-24 13:55:08 [ℹ]  nodegroup "workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:55:08 [ℹ]  nodegroup "regular-workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:55:08 [ℹ]  nodegroup "headless-workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
 2022-06-24 13:55:13 [ℹ]  1 existing nodegroup(s) (services) will be excluded
-2022-06-24 13:55:13 [ℹ]  combined include rules: workspaces
-2022-06-24 13:55:13 [ℹ]  1 nodegroup (workspaces) was included (based on the include/exclude rules)
-2022-06-24 13:55:13 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gitpod"
+2022-06-24 13:55:13 [ℹ]  combined include rules: regular-workspaces,headless-workspaces
+2022-06-24 13:55:13 [ℹ]  2 nodegroups (headless-workspaces, regular-workspaces) were included (based on the include/exclude rules)
+2022-06-24 13:55:13 [ℹ]  will create a CloudFormation stack for each of 2 managed nodegroups in cluster "gitpod"
 [...]
-2022-06-24 13:59:10 [✔]  created 1 managed nodegroup(s) in cluster "gitpod"
+2022-06-24 13:59:10 [✔]  created 2 managed nodegroup(s) in cluster "gitpod"
 2022-06-24 13:59:13 [ℹ]  checking security group configuration for all nodegroups
 2022-06-24 13:59:13 [ℹ]  all nodegroups have up-to-date cloudformation templates
 ```
@@ -639,6 +651,7 @@ You can verify that your installation was deployed properly with the custom `kub
 
 ```bash
 kubectl get nodes -o=custom-columns="NAME:.metadata.name,\
+NODEGROUP:.metadata.labels.eks\.amazonaws\.com/nodegroup,\
 RUNTIME:.status.nodeInfo.containerRuntimeVersion,\
 MAXPODS:.status.capacity.pods,\
 KERNEL:.status.nodeInfo.kernelVersion,\
@@ -673,8 +686,8 @@ helm upgrade \
     --set cloudProvider=aws \
     --set awsRegion=$AWS_REGION \
     --set autoDiscovery.clusterName=$CLUSTER_NAME \
-    --set serviceAccount.create=false \
-    --set serviceAccount.name=cluster-autoscaler \
+    --set rbac.serviceAccount.create=false \
+    --set rbac.serviceAccount.name=cluster-autoscaler \
     --set securityContext.fsGroup=65534 \
     --set extraArgs.skip-nodes-with-local-storage=false \
     --set extraArgs.skip-nodes-with-system-pods=false \

@@ -363,7 +363,7 @@ This should result in:
 2022-08-11 22:56:57 [ℹ]  all nodegroups have up-to-date cloudformation templates
 ```
 
-You can verify that your installation was deployed properly with the custom `kubectl` command provided below which will let you review maxpods, kernel and containerd versions to ensure they are meeting [our minimum requirements](../cluster-requirements.md) as intended.
+You can verify that your installation was deployed properly with the custom `kubectl` command provided below which will let you review maxpods, kernel and containerd versions to ensure they are meeting [our minimum requirements](../../latest/cluster-requirements) as intended.
 
 ```bash
 kubectl get nodes -o=custom-columns="NAME:.metadata.name,\
@@ -395,8 +395,8 @@ helm upgrade \
     --set cloudProvider=aws \
     --set awsRegion=$AWS_REGION \
     --set autoDiscovery.clusterName=$CLUSTER_NAME \
-    --set serviceAccount.create=false \
-    --set serviceAccount.name=cluster-autoscaler \
+    --set rbac.serviceAccount.create=false \
+    --set rbac.serviceAccount.name=cluster-autoscaler \
     --set securityContext.fsGroup=65534 \
     --set extraArgs.skip-nodes-with-local-storage=false \
     --set extraArgs.skip-nodes-with-system-pods=false \
