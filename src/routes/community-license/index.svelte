@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import type { Form } from "$lib/types/form.type";
+  import type { Form } from "$lib/types/form";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Textarea from "$lib/components/ui-library/textarea";
   import Input from "$lib/components/ui-library/input";
@@ -157,16 +157,6 @@
   };
 </script>
 
-<style lang="postcss">
-  .title:not(:first-child) {
-    margin-top: var(--medium);
-  }
-
-  .link {
-    @apply underline;
-  }
-</style>
-
 <OpenGraph
   data={{
     description: "Request a free community license",
@@ -198,7 +188,7 @@
     />
   {:else}
     <form bind:this={form} on:submit|preventDefault={handleSubmit} novalidate>
-      <h2 class="h4 title">Customer Information</h2>
+      <h2 class="h4">Customer Information</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-small">
         <div>
           <Input
@@ -323,7 +313,7 @@
         <div class="mt-4">
           <p class="text-sm my-4">
             By submitting this form I acknowledge that I have read and
-            understood <a class="link" href="/privacy"
+            understood <a class="!underline" href="/privacy"
               >Gitpod’s Privacy Policy.</a
             >
           </p>

@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
   import { formatDate, stringToBeautifiedFragment } from "$lib/utils/helpers";
-  import type { ChangelogEntry as ChangelogEntryType } from "$lib/types/changelog-entry.type";
+  import type { ChangelogEntry as ChangelogEntryType } from "$lib/types/changelog-entry";
   import BackLink from "$lib/components/changelog/back-link.svelte";
 
   export const prerender = true;
@@ -22,19 +22,10 @@
   import OpenGraph from "$lib/components/open-graph.svelte";
   import "$lib/assets/markdown-commons.scss";
   export let changelogEntry: ChangelogEntryType;
-  const { date, title, excerpt, content, image, alt } = changelogEntry;
+  const { date, title, excerpt, content, image, alt, ogImage } = changelogEntry;
 </script>
 
 <style lang="postcss">
-  .entry {
-    max-width: 800px;
-    @apply mx-auto;
-  }
-
-  .entry h2 {
-    @apply text-h3 !important;
-  }
-
   .entry :global(img) {
     @apply rounded-tl-lg rounded-tr-lg sm:rounded-tl-2xl sm:rounded-tr-2xl;
   }
@@ -45,14 +36,14 @@
     description: excerpt,
     title,
     type: "article",
-    image: `images/changelog/${image}`,
-    imageTwitter: `images/changelog/${image}`,
+    image: `images/changelog/${ogImage ? ogImage : image}`,
+    imageTwitter: `images/changelog/${ogImage ? ogImage : image}`,
     norobots: true,
   }}
 />
 
-<Wrapper class="pt-small pb-x-large md:pb-xx-large">
-  <div class="entry flex flex-col md:flex-row">
+<Wrapper class="pt-small pb-x-large md:pb-xxx-large">
+  <div class="entry max-w-[800px] mx-auto flex flex-col md:flex-row">
     <div class="content-changelog">
       <BackLink />
       <img
@@ -60,11 +51,13 @@
         class="rounded-xl sm:rounded-3xl"
         {alt}
       />
-      <p class="mt-xx-small -mb-9">{formatDate(date)}</p>
-      <h2>
-        {title}
-      </h2>
-      {@html content}
+      <div class="mt-xx-small">
+        <p>{formatDate(date)}</p>
+        <h2 class="!text-h3">
+          {title}
+        </h2>
+        {@html content}
+      </div>
     </div>
   </div>
 </Wrapper>

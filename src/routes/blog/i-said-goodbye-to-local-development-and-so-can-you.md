@@ -2,10 +2,10 @@
 author: mikenikles
 date: Wed, 30 Jun 2021 3:00:00 UTC
 excerpt: Stop maintaining your local developer environment. Instead, automate the setup once and use a new environment for each task you work on - available in seconds and always ready-to-code.
-image: teaser.png
+image: teaser.jpg
 slug: i-said-goodbye-to-local-development-and-so-can-you
 subtitle:
-teaserImage: teaser.png
+teaserImage: teaser.jpg
 title: I said goodbye to local development and so can you
 ---
 
@@ -71,7 +71,7 @@ Once that’s all good, he looks for onboarding instructions and works his way t
 
 **Alice**
 
-Alice creates a `.gitpod.yml` configuration file at the root of her project, then adds [start tasks](/docs/config-start-tasks) such as the following:
+Alice creates a `.gitpod.yml` configuration file at the root of her project, then adds [start tasks](/docs/configure/workspaces/tasks) such as the following:
 
 ```yaml
 tasks:
@@ -79,7 +79,7 @@ tasks:
     command: npm run dev
 ```
 
-She also enables Gitpod [Prebuilds](/docs/prebuilds) - telling Gitpod to continuously create new developer environments as soon as her project’s source code changes! This significantly reduces the startup time when she or anyone who works on her project needs a developer environment.
+She also enables Gitpod [Prebuilds](/docs/configure/projects/prebuilds) - telling Gitpod to continuously create new developer environments as soon as her project’s source code changes! This significantly reduces the startup time when she or anyone who works on her project needs a developer environment.
 
 ![Set up a new project](../../../static/images/blog/i-said-goodbye-to-local-development-and-so-can-you/set-up-a-new-project-light-theme.png)
 ![Set up a new project](../../../static/images/blog/i-said-goodbye-to-local-development-and-so-can-you/set-up-a-new-project-dark-theme.png)
@@ -100,7 +100,7 @@ Then, Bob is ready to shift into feature development mode. Well... after he star
 
 She’s keen to get started right away. Once she looks at the issue on GitHub, GitLab or Bitbucket, she simply clicks the “Gitpod” button\*. This opens a new workspace with a feature branch already created, all dependencies installed and the database and dev servers started!
 
-\* She gets that by installing the [Gitpod browser extension](/docs/browser-extension). Alternatively, she could prefix the issue URL with `gitpod.io/#<issue-url>` to open a new developer environment.
+\* She gets that by installing the [Gitpod browser extension](/docs/configure/user-settings/browser-extension). Alternatively, she could prefix the issue URL with `gitpod.io/#<issue-url>` to open a new developer environment.
 
 ![Set up a new project](../../../static/images/blog/i-said-goodbye-to-local-development-and-so-can-you/develop-a-new-feature-light-theme.png)
 ![Set up a new project](../../../static/images/blog/i-said-goodbye-to-local-development-and-so-can-you/develop-a-new-feature-dark-theme.png)

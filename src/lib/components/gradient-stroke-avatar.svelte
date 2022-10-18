@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Image } from "$lib/types/image.type";
+  import type { Image } from "$lib/types/image";
   export let image: Image;
   const { src, alt, styles } = image;
 </script>
@@ -27,6 +27,6 @@
     {src}
     {alt}
     style={styles}
-    class="{image.class} rounded-full h-[50px] w-[50px]"
+    class="{image.class} rounded-full h-[50px] w-[50px] grayscale"
   />
 </div>

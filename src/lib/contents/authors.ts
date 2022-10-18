@@ -1,4 +1,4 @@
-import type { SocialMediaLinks } from "$lib/types/avatars.type";
+import type { SocialMediaLinks } from "$lib/types/avatars";
 
 export type Author = {
   name: string;
@@ -370,6 +370,14 @@ export const authors: { [idx: string]: Author } = {
     socialProfiles: {
       github: "Siddhant-K-code",
       twitter: "Siddhant_K_code",
+    },
+    description: "",
+  },
+  whummer: {
+    name: "Waldemar Hummer",
+    socialProfiles: {
+      github: "whummer",
+      twitter: "w_hummer",
     },
     description: "",
   },

@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-  import type { SecurityLog } from "$lib/types/security.type";
+  import type { SecurityLog } from "$lib/types/security";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Header from "$lib/components/header.svelte";
   import { formatDate } from "$lib/utils/helpers";
@@ -15,12 +15,6 @@
 
   export let securityLogs: SecurityLog[];
 </script>
-
-<style lang="postcss">
-  div :global(.header) {
-    @apply mb-large;
-  }
-</style>
 
 <OpenGraph
   data={{
@@ -38,7 +32,7 @@
     title="Security Log"
     centered={false}
     text="A sum-up of Gitpod’s latest security findings and updates."
-    class="w-full header"
+    class="w-full header mb-large"
     textAlign="left"
   />
 </div>

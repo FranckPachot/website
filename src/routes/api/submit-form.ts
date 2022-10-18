@@ -1,6 +1,6 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import * as client from "@sendgrid/mail";
-import save from "$lib/api/save-to-spreadsheet";
+import saveToSpreadsheet from "$lib/api/save-to-spreadsheet";
 import type { Email, EmailToType } from "$lib/api/api";
 
 const determineToEmail = (toType: EmailToType = "contact") => {
@@ -59,30 +59,6 @@ async function sendEmail(
   }
 }
 
-async function saveToSheet(
-  sheetTitle: string,
-  data: any,
-  type?: "signup" | "webinar-registeration"
-) {
-  const isSaved = await save({
-    sheetTitle,
-    data,
-    type,
-  });
-
-  if (isSaved === "duplicate") {
-    return {
-      statusCode: 409,
-      body: "duplicate",
-    };
-  } else {
-    return {
-      statusCode: isSaved ? 200 : 500,
-      body: JSON.stringify(data) + " added",
-    };
-  }
-}
-
 export const post: RequestHandler = async ({ request }) => {
   const body = await request.json();
   const email: Email = body! as Email;
@@ -132,35 +108,18 @@ export const post: RequestHandler = async ({ request }) => {
     ];
 
     try {
-      const saveResponse = await saveToSheet(
-        "Free Self-Hosted Community License",
-        data
-      );
-
-      sheetRes.status = saveResponse.statusCode;
-      sheetRes.body = saveResponse.body;
-    } catch (err) {
-      console.error(err);
-      sheetRes.status = 500;
-      sheetRes.body = err;
-    }
-  } else if (email.toType === "webinar-registeration") {
-    const data = [
-      new Date(),
-      email.data.name,
-      email.data.email,
-      email.data.company,
-      email.data.jetbrainsConsent,
-    ];
-
-    try {
-      const saveResponse = await saveToSheet(
-        "Webinar registrations",
+      const isSaved = await saveToSpreadsheet({
+        sheetTitle: "Free Self-Hosted Community License",
         data,
-        "webinar-registeration"
-      );
-      sheetRes.status = saveResponse.statusCode;
-      sheetRes.body = saveResponse.body;
+      });
+
+      if (isSaved === "duplicate") {
+        sheetRes.status = 409;
+        sheetRes.body = "duplicate";
+      } else {
+        sheetRes.status = isSaved ? 200 : 500;
+        sheetRes.body = JSON.stringify(data) + " added";
+      }
     } catch (err) {
       console.error(err);
       sheetRes.status = 500;
@@ -168,7 +127,7 @@ export const post: RequestHandler = async ({ request }) => {
     }
   }
 
-  if (!dontEmail && email.toType !== "webinar-registeration") {
+  if (!dontEmail) {
     client.setApiKey(SENDGRID_API_KEY);
     const dontEmailResponse = await sendEmail(client, email);
     sheetRes.status = dontEmailResponse.statusCode;
@@ -189,7 +148,7 @@ export const post: RequestHandler = async ({ request }) => {
       res.status === 500;
       res.body = emailRes.body;
     }
-  } else if (!dontEmail && email.toType !== "webinar-registeration") {
+  } else if (!dontEmail) {
     res.status = emailRes.status;
     res.body = emailRes.body;
   } else {

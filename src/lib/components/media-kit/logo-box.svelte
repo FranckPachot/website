@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Logo } from "$lib/types/logo.type";
+  import type { Logo } from "$lib/types/logo";
   import LinkButton from "$lib/components/ui-library/link-button";
 
   export let logo: Logo;
@@ -28,7 +28,7 @@
 >
   <img src={svgSrc} {alt} class="mx-auto" />
   <p class="mt-medium mb-micro">Download {text}</p>
-  <div class="flex justify-center items-center flex-wrap space-x-4">
+  <div class="flex justify-center items-center flex-wrap gap-4">
     <LinkButton
       style="min-width: 0"
       variant="primary"

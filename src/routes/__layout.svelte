@@ -31,7 +31,7 @@
   import Footer from "$lib/components/footer/index.svelte";
   import CookieConsent from "$lib/components/banners/cookie-consent.svelte";
   import { key } from "$lib/components/banners/announcement.svelte";
-  import type { BannerData } from "$lib/types/banner.type";
+  import type { BannerData } from "$lib/types/banner";
   import { isEurope, removeTrailingSlash } from "$lib/utils/helpers";
   import Cookies from "js-cookie";
   import { cookies } from "$lib/constants";
@@ -89,15 +89,11 @@
 
 <LayoutRoot>
   <Nav />
+  <ContactWidget />
   <LayoutMain>
     <slot />
   </LayoutMain>
   <Footer />
 </LayoutRoot>
-<div
-  class="fixed bottom-0 flex flex-col-reverse md:flex-row justify-between md:items-end w-full"
->
-  <CookieConsent />
-  <ContactWidget />
-</div>
+<CookieConsent />
 <Segment />

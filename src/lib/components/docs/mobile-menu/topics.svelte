@@ -5,7 +5,7 @@
   // States
   import topicsState from "../states/topics-state";
 
-  import type { MenuEntry } from "$lib/types/menu-entry.type";
+  import type { MenuEntry } from "$lib/types/menu-entry";
   export let MENU: MenuEntry[];
 </script>
 
@@ -13,6 +13,7 @@
   <ul class="divide-y divide-divider">
     {#each MENU as menuItem}
       <MenuItem
+        isHeader={menuItem.isSectionHeader}
         href={menuItem.path}
         showIcon={true}
         onClick={() => ($topicsState = false)}

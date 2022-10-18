@@ -64,6 +64,7 @@ module.exports = {
         "off-black": "var(--off-black)",
         "light-black": "var(--light-black)",
         "light-black-hover": "var(--light-black-hover)",
+        "light-grey": "var(--light-grey)",
         "dark-grey": "var(--dark-grey)",
       },
       fontSize: {
@@ -91,6 +92,7 @@ module.exports = {
       spacing: {
         huge: "var(--huge)",
         "x-huge": "var(--x-huge)",
+        "xxx-large": "var(--xxx-large)",
         "xx-large": "var(--xx-large)",
         "x-large": "var(--x-large)",
         large: "var(--large)",

@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-  import type { ChangelogEntry as ChangelogEntryType } from "$lib/types/changelog-entry.type";
+  import type { ChangelogEntry as ChangelogEntryType } from "$lib/types/changelog-entry";
 
   import OpenGraph from "$lib/components/open-graph.svelte";
   import "$lib/assets/markdown-commons.scss";
@@ -23,16 +23,6 @@
   export let changelogEntries: ChangelogEntryType[];
 </script>
 
-<style lang="postcss">
-  .changelog-entry {
-    @apply flex flex-col md:flex-row last:pb-x-large md:last:pb-xx-large;
-
-    & + .changelog-entry {
-      @apply pt-x-large md:pt-xx-large;
-    }
-  }
-</style>
-
 <OpenGraph
   data={{
     description:
@@ -41,6 +31,9 @@
     type: "website",
     keywords:
       "updates, product, changes, features, releases, bugs, fixes, version, updates, improvements",
+    // Update this each monthly release and enter the changelog URL into https://cards-dev.twitter.com/validator to force twitter to refresh it
+    image: "images/changelog/2022-09-30-og.png",
+    imageTwitter: "images/changelog/2022-09-30-og.png",
   }}
 />
 
@@ -67,16 +60,29 @@
 </div>
 
 <div
-  class="flex flex-col space-y-x-large md:space-y-xx-large divide-y divide-divider"
+  class="flex flex-col space-y-x-large md:space-y-xxx-large divide-y divide-divider"
 >
-  {#each changelogEntries as { date, title, content, image, alt }}
-    <div class="changelog-entry">
+  {#each changelogEntries as { date, title, content, image, alt }, i}
+    <div
+      class="changelog-entry flex flex-col md:flex-row last:pb-x-large md:last:pb-xxx-large {i !==
+        0 &&
+        i !== changelogEntries.length &&
+        'pt-x-large md:pt-xxx-large'}"
+    >
       <ChangelogDate
         date={formatDate(date)}
         href={`/changelog/${stringToBeautifiedFragment(title)}`}
       />
       <Wrapper class="content-changelog w-full md:w-8/12">
-        <img src="/images/changelog/{image}" class="rounded-3xl" {alt} />
+        <img
+          src="/images/changelog/{image}"
+          class="rounded-3xl"
+          width="800"
+          height="435"
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          {alt}
+        />
         <h2>
           <ChangelogLink
             href={`/changelog/${stringToBeautifiedFragment(title)}`}

@@ -2,7 +2,7 @@
   import LinkButton from "$lib/components/ui-library/link-button";
   import Button from "$lib/components/ui-library/button";
   import { isAnExternalLink } from "$lib/utils/helpers";
-  import type { Card } from "$lib/types/card.type";
+  import type { Card } from "$lib/types/card";
   import Modal from "$lib/components/ui-library/modal";
   import type { ButtonSizes } from "../ui-library/button/button";
   let clazz = "";
@@ -53,10 +53,12 @@
         />
       </div>
     {/if}
-    {#if headingLevel === "h3"}
-      <h3 class={titleClassNames}>{title}</h3>
-    {:else}
-      <h2 class={titleClassNames}>{title}</h2>
+    {#if title}
+      {#if headingLevel === "h3"}
+        <h3 class={titleClassNames}>{title}</h3>
+      {:else}
+        <h2 class={titleClassNames}>{title}</h2>
+      {/if}
     {/if}
     <p class="{alignmentMap[textAlign]} mt-micro">{@html text}</p>
   </div>

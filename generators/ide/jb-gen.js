@@ -28,6 +28,14 @@ products.set("pycharm", {
   productTitle: "PyCharm",
   productDocCode: "pycharm",
 });
+products.set("rubymine", {
+  productTitle: "RubyMine",
+  productDocCode: "ruby",
+});
+products.set("webstorm", {
+  productTitle: "WebStorm",
+  productDocCode: "webstorm",
+});
 
 const keys = new Set();
 keys.add("productId");
@@ -48,7 +56,10 @@ for (const [id, parameters] of products) {
     content = content.replace(new RegExp(`__${key}__`, "gi"), value);
   }
   fs.writeFileSync(
-    path.join(__dirname, `../../gitpod/docs/ides-and-editors/${id}.md`),
+    path.join(
+      __dirname,
+      `../../gitpod/docs/references/ides-and-editors/${id}.md`
+    ),
     content,
     "utf-8"
   );

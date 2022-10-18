@@ -1,5 +1,5 @@
-import type { FeatureTitle } from "$lib/types/feature-title.type";
-import type { Image } from "$lib/types/image.type";
+import type { FeatureTitle } from "$lib/types/feature-title";
+import type { Image } from "$lib/types/image";
 
 export const featureTitles: FeatureTitle[] = [
   {
@@ -22,7 +22,7 @@ export const featureTitles: FeatureTitle[] = [
 
 export const imagesTop: Image[] = [
   {
-    src: "/images/about/3.jpg",
+    src: "/images/about/3.png",
     alt: "Gitpod team members taking a selfie.",
   },
   {

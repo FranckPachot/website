@@ -1,11 +1,11 @@
-import type { Pricing } from "$lib/types/pricing.type";
+import type { Pricing } from "$lib/types/pricing";
 import { isEurope } from "$lib/utils/helpers";
 import type {
   FeatureTable,
   FeatureTableColumn,
   FeatureTableToc,
-} from "../components/ui-library/feature-table/feature-table.types";
-import type { FAQ } from "../types/faq.type";
+} from "../components/ui-library/feature-table/feature-table";
+import type { FAQ } from "../types/faq";
 // @ts-ignore
 import githubMarkSvelte from "$lib/components/svgs/github-mark.svelte";
 
@@ -73,7 +73,7 @@ export const communityPlanTableData: FeatureTableColumn = {
   },
   link: {
     label: "Install now",
-    href: "/docs/self-hosted",
+    href: "/docs/configure/self-hosted/latest",
   },
   enteries: [
     {
@@ -407,7 +407,7 @@ export const selfHostedToc: FeatureTableToc[] = [
     data: {
       text: "Prebuilds",
       tooltip:
-        "Enable prebuilds to continuously build your Git branches, so you and your team can always start coding right away. More on <a href='/docs/prebuilds'>prebuilds</a>.",
+        "Enable prebuilds to continuously build your Git branches, so you and your team can always start coding right away. More on <a href='/docs/configure/projects/prebuilds'>prebuilds</a>.",
     },
   },
   {
@@ -468,7 +468,7 @@ export const selfHostedToc: FeatureTableToc[] = [
     data: {
       text: "Multi-IDE support",
       tooltip:
-        "Connect Gitpod with your favourite IDE. View <a href='/docs/ides-and-editors'>docs/IDE</a> to see all suported IDE’s.",
+        "Connect Gitpod with your favourite IDE. View <a href='/docs/references/ides-and-editors'>docs/IDE</a> to see all suported IDE’s.",
     },
   },
   {
@@ -546,7 +546,7 @@ export const selfhostedFAQ: FAQ = {
     {
       title: "How can I install Self-Hosted?",
       content:
-        '<p> You can either install <strong>Gitpod Self-Hosted</strong> on Google GKE, Amazon EKS, Azure AKS, or K3s. See <a href="/docs/self-hosted">Self-Hosted Docs</a> for more information. </p>',
+        '<p> You can either install <strong>Gitpod Self-Hosted</strong> on Google GKE, Amazon EKS, Azure AKS, or K3s. See <a href="/docs/configure/self-hosted/latest">Self-Hosted Docs</a> for more information. </p>',
     },
     {
       title: "How can I pay?",

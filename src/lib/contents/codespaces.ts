@@ -2,12 +2,12 @@
 import awsSvelte from "$lib/components/svgs/aws.svelte";
 // @ts-ignore
 import githubMarkSvelte from "$lib/components/svgs/github-mark.svelte";
-import type { verticalFeature } from "$lib/types/feature.type";
+import type { verticalFeature } from "$lib/types/feature";
 import type {
   FeatureTable,
   FeatureTableColumn,
   FeatureTableToc,
-} from "../components/ui-library/feature-table/feature-table.types";
+} from "../components/ui-library/feature-table/feature-table";
 
 export const codespacesToc: FeatureTableToc[] = [
   {
@@ -113,7 +113,7 @@ export const codespacesToc: FeatureTableToc[] = [
   {
     type: "text",
     data: {
-      text: "VS Code Extensions",
+      text: "VS Code extensions",
     },
   },
   {
@@ -207,7 +207,7 @@ export const gitpodColumns: FeatureTableColumn = {
           availability: true,
         },
         {
-          term: "VS Code Extensions",
+          term: "VS Code extensions",
           availability: true,
         },
         {
@@ -293,7 +293,7 @@ export const codespacesColumn: FeatureTableColumn = {
           availability: false,
         },
         {
-          term: "VS Code Extensions",
+          term: "VS Code extensions",
           availability: true,
         },
         {

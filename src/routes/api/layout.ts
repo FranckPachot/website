@@ -2,6 +2,8 @@ import type { RequestHandler } from "@sveltejs/kit";
 import path from "path";
 import fs from "fs";
 
+const fallbackStars = 9200;
+
 const startDate = new Date("Apr 28 2022 06:00:00 EST");
 const endDate = new Date("May 28 2022 06:00:00 EST");
 
@@ -43,13 +45,18 @@ export const get: RequestHandler = async ({ request }) => {
             }
           );
         } catch (error) {
-          // A cached file is not required
+          console.log("failed to write cache file");
         }
       }
       stars = starsCount;
-      bannerData = getBannerData();
     }
   }
+
+  if (!stars) {
+    stars = fallbackStars;
+  }
+
+  bannerData = getBannerData();
 
   return {
     status: 200,

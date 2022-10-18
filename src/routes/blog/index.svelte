@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import type { BlogPost } from "$lib/types/blog-post.type";
+  import type { BlogPost } from "$lib/types/blog-post";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import PostPreview from "$lib/components/blog/post-preview.svelte";
   import Section from "$lib/components/section.svelte";
@@ -19,7 +19,7 @@
 
 <style lang="postcss">
   .blog-layout {
-    @apply mb-xx-large;
+    @apply mb-xxx-large;
 
     @media (max-width: 972px) {
       @apply mb-x-large;
