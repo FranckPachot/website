@@ -274,7 +274,7 @@ vscode:
     - vscjava.vscode-java-pack
 ```
 
-See [.gitpod.yml reference](../references/gitpod-yml) for more.
+See [.gitpod.yml reference](/docs/references/gitpod-yml) for more.
 
 ### Configuring VS Code Launch configurations
 
@@ -312,7 +312,7 @@ jetbrains:
       - com.intellij.lang.jsgraphql
 ```
 
-See [.gitpod.yml reference](../references/gitpod-yml) for more.
+See [.gitpod.yml reference](/docs/references/gitpod-yml) for more.
 
 ## Optimising Java Applications
 

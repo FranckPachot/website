@@ -129,7 +129,7 @@ tasks:
     command: echo "$PRINT_ME"
 ```
 
-See [`.gitpod.yml`](./references/gitpod-yml#tasksnenv) for more details.
+See [`.gitpod.yml`](/docs/references/gitpod-yml#tasksnenv) for more details.
 
 ## Providing one-time environment variables via URL
 

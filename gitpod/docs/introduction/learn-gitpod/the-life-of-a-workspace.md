@@ -35,7 +35,7 @@ Not to worry, your changes are safe. You can navigate back to https://gitpod.io,
 
 ### I want my team / client to review my work
 
-If you want to send a preview URL to someone so they can review your work, you may do that as long as your workspace doesn't time out. Make sure you set your application's port's `visibility` to `public` ([docs](./references/gitpod-yml#portsnvisibility)).
+If you want to send a preview URL to someone so they can review your work, you may do that as long as your workspace doesn't time out. Make sure you set your application's port's `visibility` to `public` ([docs](/docs/references/gitpod-yml#portsnvisibility)).
 
 In cases where you don't know how long it will take until someone looks at your preview, it is best to use pull request preview deployments provided by your hosting provider.
 

@@ -40,7 +40,7 @@
   import EditInGitpod from "$lib/components/docs/edit-in-gitpod.svelte";
   import displayBanner from "$lib/stores/display-banner";
   import { onMount, setContext } from "svelte";
-  import type { MenuEntry } from "$lib/types/menu-entry.type";
+  import type { MenuEntry } from "$lib/types/menu-entry";
   import type { Load } from "@sveltejs/kit";
   import { sidebarKey } from "$lib/contents/docs/key";
   import VersionSwitch from "$lib/components/docs/version-switch.svelte";

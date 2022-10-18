@@ -42,7 +42,7 @@ And if you prefer listing all open ports URLs at once, use [gp ports list](/docs
 
 ## Configuring port behaviors
 
-To modify or change default port behaviors, update the `ports` section of your [`.gitpod.yml`](./references/gitpod-yml).
+To modify or change default port behaviors, update the `ports` section of your [`.gitpod.yml`](/docs/references/gitpod-yml).
 
 All changes to port behaviors take effect immediately, not requiring a workspace restart.
 
@@ -52,7 +52,7 @@ All changes to port behaviors take effect immediately, not requiring a workspace
 
 The port open event is triggered when a new port is detected as open within the workspace.
 
-Port opening behavior can only be set via the [`.gitpod.yml`](./references/gitpod-yml)
+Port opening behavior can only be set via the [`.gitpod.yml`](/docs/references/gitpod-yml)
 
 The property `onOpen` configures port opening behaviors:
 

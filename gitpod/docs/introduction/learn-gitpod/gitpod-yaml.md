@@ -27,7 +27,7 @@ ports:
     description: Website Preview
 ```
 
-To see a full reference of all available properties, please refer to the [`.gitpod.yml reference`](./references/gitpod-yml) page.
+To see a full reference of all available properties, please refer to the [`.gitpod.yml reference`](/docs/references/gitpod-yml) page.
 
 `youtube: fA2fpqP1xaM`
 

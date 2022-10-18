@@ -11,7 +11,7 @@ title: Multi-repo
 
 > {title} is currently in [Beta](/docs/help/public-roadmap/release-cycle) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8623).
 
-If your software project is comprised of multiple source control repositories it is possible to configure Gitpod to clone these additional repositories through the configuration keys of `additionalRepositories` and `mainConfiguration` in the [.gitpod.yml](./references/gitpod-yml) file which removes the need to run multiple workspaces, and makes it easier to configure services which need to be aware of each other.
+If your software project is comprised of multiple source control repositories it is possible to configure Gitpod to clone these additional repositories through the configuration keys of `additionalRepositories` and `mainConfiguration` in the [.gitpod.yml](/docs/references/gitpod-yml) file which removes the need to run multiple workspaces, and makes it easier to configure services which need to be aware of each other.
 
 ## Cloning additional repositories
 
@@ -64,7 +64,7 @@ Try it out at https://github.com/gitpod-io/demo-multi-repo-frontend
 
 ## Delegating configuration
 
-The optional `mainConfiguration` configuration key when configured in additional repositories points to the repository with the main [.gitpod.yml](./references/gitpod-yml) file and makes it possible to open the same workspace from any issue, branch or other context URL from any of the participating repositories. Since the main configuration is used for prebuilds, those will show up under the main project.
+The optional `mainConfiguration` configuration key when configured in additional repositories points to the repository with the main [.gitpod.yml](/docs/references/gitpod-yml) file and makes it possible to open the same workspace from any issue, branch or other context URL from any of the participating repositories. Since the main configuration is used for prebuilds, those will show up under the main project.
 
 ```yaml
 # example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-backend

@@ -15,7 +15,7 @@ title: Tasks
   ! If you update the diagrams, make sure you replace the above, immutable URL !
 -->
 
-To get the most out of ephemeral developer environments, it is important to let Gitpod know how to build your project. We can achieve this by defining `tasks` in the [`.gitpod.yml`](./references/gitpod-yml) configuration file.
+To get the most out of ephemeral developer environments, it is important to let Gitpod know how to build your project. We can achieve this by defining `tasks` in the [`.gitpod.yml`](/docs/references/gitpod-yml) configuration file.
 
 > **Note**: In your local developer environment, you likely set up your project only once. If you work in a team, you probably have written instructions on how to get started. With Gitpod, you automate these manual steps so that a new environment can be set up repeatedly by Gitpod.
 

@@ -43,7 +43,7 @@ Use "gp [command] --help" for more information about a command.
 
 ## init
 
-Gitpod workspaces can be configured - see [Configuring Workspaces](./configure) for more details. `gp init` generates a default `.gitpod.yml` file. You can customize it to match your requirements.
+Gitpod workspaces can be configured - see [Configuring Workspaces](/docs/configure) for more details. `gp init` generates a default `.gitpod.yml` file. You can customize it to match your requirements.
 
 Alternatively, `gp init -i` is an interactive guide which helps create the `.gitpod.yml` configuration file based on a few questions you answer.
 
@@ -144,7 +144,7 @@ gp stop
 
 ## tasks
 
-Programmatically view and interact with workspace tasks as defined in the project's [.gitpod.yml](./references/gitpod-yml). Useful when using the command line, such as ssh'ing into a workspace or after accidentally losing view of a terminal and it's output.
+Programmatically view and interact with workspace tasks as defined in the project's [.gitpod.yml](/docs/references/gitpod-yml). Useful when using the command line, such as ssh'ing into a workspace or after accidentally losing view of a terminal and it's output.
 
 ### list
 
@@ -236,7 +236,7 @@ You can also use `gp info --json` to get the output in JSON format.
 
 ## ports
 
-Provides a way to manage a workspace's ports. Applies to both: ports defined in [.gitpod.yml](./references/gitpod-yml) and ports that are undeclared but are opened during the lifetime of the workspace.
+Provides a way to manage a workspace's ports. Applies to both: ports defined in [.gitpod.yml](/docs/references/gitpod-yml) and ports that are undeclared but are opened during the lifetime of the workspace.
 
 ### list
 

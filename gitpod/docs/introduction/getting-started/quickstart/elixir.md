@@ -76,5 +76,5 @@ Try it out and open 3 workspaces on the same context (e.g. on main or on an issu
 
 You've successfully ran your first workspace and experienced first hand what we mean with ephemeral dev environments. This is just the first step on your journey towards being always ready to code. Helpful resources from here are:
 
-- [Getting started with your own project](../configure)
-- [Git Integrations](../integrations)
+- [Getting started with your own project](/docs/configure)
+- [Git Integrations](/docs/integrations)

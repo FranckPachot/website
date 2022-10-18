@@ -50,7 +50,7 @@ You can install the Gitpod browser extension on any [Chromium-based](https://chr
 
 The extension simply adds a Gitpod button on every project and branch across GitHub, and Bitbucket that prefixes the URL with `gitpod.io/#` so that you can easily open a new workspace from any Git context.
 
-![Browser Extension](/images/docs/browser-extension-lense.png)
+![Browser Extension](../../../static/images/docs/browser-extension-lense.png)
 
 If you prefer to not install browser extensions then you can use the Gitpod [browser bookmarklet](/docs/configure/user-settings/browser-bookmarklet) instead.
 
@@ -74,5 +74,5 @@ Try it out and open 3 workspaces on the same context (e.g. on main or on an issu
 
 You've successfully ran your first workspace and experienced first hand what we mean with ephemeral dev environments. This is just the first step on your journey towards being always ready to code. Helpful resources from here are:
 
-- [Getting started with your own project](../configure)
-- [Git Integrations](../integrations)
+- [Getting started with your own project](/docs/configure)
+- [Git Integrations](/docs/integrations)
