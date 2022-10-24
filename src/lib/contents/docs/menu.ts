@@ -194,6 +194,27 @@ export const MENU: MenuEntry[] = [
 
   M("References", "references", true),
   M(".gitpod.yml", "references/gitpod-yml"),
+  M(
+    "Gitpod public API",
+    "references/gitpod-public-api",
+    false,
+    [
+      M(
+        "List all workspaces",
+        "references/gitpod-public-api/list-workspaces-api"
+      ),
+      M("Get a workspace", "references/gitpod-public-api/get-workspace-api"),
+      M(
+        "Create & start workspace",
+        "references/gitpod-public-api/create-start-workspace-api"
+      ),
+      M(
+        "Get owner token",
+        "references/gitpod-public-api/create-start-workspace-api"
+      ),
+    ],
+    "alpha"
+  ),
   M("IDEs & editors", "references/ides-and-editors", false, [
     M("VS Code Browser", "references/ides-and-editors/vscode-browser"),
     M(
