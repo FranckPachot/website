@@ -9,18 +9,6 @@
     }
   }
 
-  const getPageProps = (): PageProps => {
-    return {
-      path: window.location.pathname,
-      url: window.location.href,
-      search: window.location.search,
-      title: document.title,
-      referrer: window.prevPages
-        ? window.prevPages[window.prevPages.length - 1]
-        : undefined,
-    };
-  };
-
   const allowsAnalytics = () => {
     //isDoNotTrack is adopted from Segment snippet, see https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/#step-2-add-the-segment-snippet
     const isDoNotTrack = () =>
@@ -34,23 +22,13 @@
     return !!Cookies.get(cookies.ANALYTICAL) && !isDoNotTrack();
   };
 
-  export const trackEvent = async (
+  export const trackEvent = (
     eventName: string,
     props: any,
     isStrictlyNecessary?: boolean
   ) => {
     if (!(allowsAnalytics() || isStrictlyNecessary)) {
-      const body: AnalyticsPayload = {
-        type: "event",
-        eventName,
-        props: props,
-        context: { page: getPageProps() },
-      };
-
-      await fetch("/api/analytics", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
+      return;
     }
     window.analytics?.track(
       eventName,
@@ -70,18 +48,9 @@
     );
   };
 
-  export const trackPage = async (props: any) => {
+  export const trackPage = (props: any) => {
     if (!allowsAnalytics()) {
-      const body: AnalyticsPayload = {
-        type: "page",
-        props: getPageProps(),
-        context: { page: getPageProps() },
-      };
-
-      await fetch("/api/analytics", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
+      return;
     }
     window.analytics?.page(
       {
@@ -97,21 +66,9 @@
     );
   };
 
-  export const trackIdentity = async (
-    traits: any,
-    isStrictlyNecessary?: boolean
-  ) => {
+  export const trackIdentity = (traits: any, isStrictlyNecessary?: boolean) => {
     if (!(allowsAnalytics() || isStrictlyNecessary)) {
-      const body: AnalyticsPayload = {
-        type: "identity",
-        traits: traits,
-        context: { page: getPageProps() },
-      };
-
-      await fetch("/api/analytics", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
+      return;
     }
     window.analytics?.identify(traits, {
       context: {
@@ -130,7 +87,6 @@
   import { page } from "$app/stores";
   import Cookies from "js-cookie";
   import { cookies } from "$lib/constants";
-  import type { AnalyticsPayload, PageProps } from "../types/analytics";
 
   interface TrackWebsiteClick {
     path: string;
@@ -339,7 +295,7 @@
     analytics.load(writeKey);
 
     // Track first page
-    await trackPage({});
+    trackPage({});
     window.prevPages = [window.location.href];
     window.addEventListener("click", handleButtonOrAnchorTracking, true);
 
@@ -353,7 +309,7 @@
         new URLSearchParams(window.location.search).get("track")
       );
       if (doTrack) {
-        await trackEvent(
+        trackEvent(
           window.location.pathname == "/extension-activation"
             ? "extension_installed"
             : "extension_uninstalled",
@@ -373,12 +329,11 @@
       trackPage({
         referrer: window.prevPages[window.prevPages.length - 1],
         url: window.location.href,
-      }).then(() => {
-        window.prevPages.push(window.location.href);
-        if (window.prevPages.length > 2) {
-          window.prevPages.shift();
-        }
       });
+      window.prevPages.push(window.location.href);
+      if (window.prevPages.length > 2) {
+        window.prevPages.shift();
+      }
     }
   }
 </script>

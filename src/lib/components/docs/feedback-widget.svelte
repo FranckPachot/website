@@ -19,7 +19,7 @@
   const submitFeedback = async () => {
     isSubmissionInProgress = true;
 
-    await trackEvent(
+    trackEvent(
       "feedback_submitted",
       {
         score: selectedEmotion,

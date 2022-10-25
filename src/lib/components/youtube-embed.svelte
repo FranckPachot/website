@@ -24,12 +24,11 @@
   const VIDEO_PLAYING = 1;
   let videoStarted = false;
 
-  //TODO check if this needs to be async
   const setUpVideo = () => {
-    const onStateChange = async (e: any) => {
+    const onStateChange = (e: any) => {
       if (e.data == VIDEO_PLAYING) {
         if (!videoStarted) {
-          await trackEvent("screencast_started", {
+          trackEvent("screencast_started", {
             id: embedId,
             name: title,
             url: window.location.href,
@@ -45,7 +44,7 @@
     });
   };
 
-  afterUpdate(async () => {
+  afterUpdate(() => {
     if (typeof YT === "undefined") {
       var tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -53,7 +52,7 @@
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       // Youtube script will automatically call the following function
-      window.onYouTubeIframeAPIReady = async () => {
+      window.onYouTubeIframeAPIReady = () => {
         setUpVideo();
       };
     } else {

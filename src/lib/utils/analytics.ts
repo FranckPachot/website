@@ -24,6 +24,35 @@ const getPageProps = (): PageProps => {
   };
 };
 
+export const trackEvent = async (eventName: string, props: any) => {
+  const pageProps = getPageProps();
+
+  const body: AnalyticsPayload = {
+    type: "event",
+    eventName,
+    props: props,
+    context: { page: pageProps },
+  };
+
+  await fetch("/api/analytics", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const trackIdentity = async (traits: any) => {
+  const body: AnalyticsPayload = {
+    type: "identity",
+    traits: traits,
+    context: { page: getPageProps() },
+  };
+
+  await fetch("/api/analytics", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
 export const trackPage = async () => {
   const pageProps = getPageProps();
   const body: AnalyticsPayload = {
