@@ -34,7 +34,7 @@
     src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"
     defer></script>
   <script
-    src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"
+    src="https://unpkg.com/@lottiefiles/lottie-interactivity@1.5.2/dist/lottie-interactivity.min.js"
     defer></script>
 </svelte:head>
 
