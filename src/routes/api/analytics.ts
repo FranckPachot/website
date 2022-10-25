@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { generateHash } from "$lib/utils/analytics";
 import type { AnalyticsPayload, PageProps } from "$lib/types/analytics";
 
-const writeKey = process.env.ANALYTICS_WRITE_KEY || "";
+const writeKey = process.env.SEGMENT_KEY || "";
 
 export const post: RequestHandler = async ({ request }) => {
   const body = (await request.json()) as AnalyticsPayload;
