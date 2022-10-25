@@ -30,12 +30,8 @@
 </script>
 
 <svelte:head>
-  <script
-    src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"
-    defer></script>
-  <script
-    src="https://unpkg.com/@lottiefiles/lottie-interactivity@1.5.2/dist/lottie-interactivity.min.js"
-    defer></script>
+  <script src="/lottie/lottie-player.js" defer></script>
+  <script src="/lottie/lottie-interactivity.min.js" defer></script>
 </svelte:head>
 
 <lottie-player
