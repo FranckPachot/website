@@ -29,6 +29,15 @@
   });
 </script>
 
+<svelte:head>
+  <script
+    src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"
+    defer></script>
+  <script
+    src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"
+    defer></script>
+</svelte:head>
+
 <lottie-player
   {id}
   {src}

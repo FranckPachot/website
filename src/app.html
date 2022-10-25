@@ -17,8 +17,6 @@
         window.location.replace("https://gitpod.io/" + window.location.hash);
       }
     </script>
-    <script src="/lottie/lottie-player.js" defer></script>
-    <script src="/lottie/lottie-interactivity.js" defer></script>
 
     <link
       rel="preload"
@@ -51,15 +49,14 @@
       const theme = localStorage.getItem("theme");
       const darkMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-      if(theme === null) {
+      if (theme === null) {
         localStorage.setItem("theme", "system");
-        if(darkMediaQuery.matches) {
-          document.body.classList.add('dark')
+        if (darkMediaQuery.matches) {
+          document.body.classList.add("dark");
         } else {
-          document.body.classList.add('light')
+          document.body.classList.add("light");
         }
-      }
-      else if (theme === "dark") {
+      } else if (theme === "dark") {
         document.body.classList.add("dark");
       } else if (theme === "light") {
         document.body.classList.add("light");
@@ -72,7 +69,7 @@
       darkMediaQuery.addEventListener("change", () => {
         const storedTheme = localStorage.getItem("theme");
         if (storedTheme === "system") {
-          console.log("Called.")
+          console.log("Called.");
           if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
             document.body.classList.replace("light", "dark");
           } else {
