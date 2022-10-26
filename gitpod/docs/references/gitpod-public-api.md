@@ -40,7 +40,7 @@ It lists all the workspaces belongs to the authenticated user.
 | `pageSize`                  | It is maximum number of results we expect                     | Int32 | false    |
 | `fieldMask` (_coming soon_) | It used to specify a subset of fields that should be returned | Int32 | false    |
 
-#### **Reponse Parameters**:
+**Reponse Parameters**:
 
 | Parameter         | Description                                                                                                              | Type   |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ |
