@@ -3,3 +3,8 @@ export type ManifestoListItem = {
   subHeading: string;
   description: string;
 };
+
+export type ManifestoBenefit = {
+  heading: string;
+  description: string;
+};
