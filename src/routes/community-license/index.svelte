@@ -85,7 +85,7 @@
 
     isSubmissionInProgress = true;
 
-    trackIdentity(
+    await trackIdentity(
       {
         name_untrusted: formData.name.value,
         email_untrusted: formData.email.value,
@@ -93,7 +93,7 @@
       true
     );
 
-    trackEvent(
+    await trackEvent(
       "message_submitted",
       {
         full_name: formData.name.value,

@@ -25,10 +25,10 @@
   let videoStarted = false;
 
   const setUpVideo = () => {
-    const onStateChange = (e: any) => {
+    const onStateChange = async (e: any) => {
       if (e.data == VIDEO_PLAYING) {
         if (!videoStarted) {
-          trackEvent("screencast_started", {
+          await trackEvent("screencast_started", {
             id: embedId,
             name: title,
             url: window.location.href,

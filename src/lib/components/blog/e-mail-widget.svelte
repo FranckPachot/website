@@ -36,14 +36,14 @@
 
     isSubmittedOnce = true;
 
-    trackIdentity(
+    await trackIdentity(
       {
         email_untrusted: formData.email.value,
       },
       true
     );
 
-    trackEvent("email_submitted", {}, true);
+    await trackEvent("email_submitted", {}, true);
 
     const response = await fetch("/api/signup", {
       method: "post",

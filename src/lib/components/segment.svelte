@@ -22,7 +22,7 @@
     return !!Cookies.get(cookies.ANALYTICAL) && !isDoNotTrack();
   };
 
-  export const trackEvent = (
+  export const trackEvent = async (
     eventName: string,
     props: any,
     isStrictlyNecessary?: boolean
@@ -30,47 +30,13 @@
     if (!(allowsAnalytics() || isStrictlyNecessary)) {
       return;
     }
-    window.analytics?.track(
+    const body: AnalyticsPayload = {
+      type: "event",
       eventName,
-      {
+      props: {
         ...props,
         authenticated: !!Cookies.get("gitpod-user"),
       },
-      {
-        context: {
-          ip: "0.0.0.0",
-          page: {
-            referrer: window.prevPages?.length == 2 ? window.prevPages[0] : "",
-            url: window.location.href,
-          },
-        },
-      }
-    );
-  };
-
-  export const trackPage = (props: any) => {
-    if (!allowsAnalytics()) {
-      return;
-    }
-    window.analytics?.page(
-      {
-        ...props,
-        authenticated: !!Cookies.get("gitpod-user"),
-      },
-      {
-        context: {
-          ip: "0.0.0.0",
-          page: props,
-        },
-      }
-    );
-  };
-
-  export const trackIdentity = (traits: any, isStrictlyNecessary?: boolean) => {
-    if (!(allowsAnalytics() || isStrictlyNecessary)) {
-      return;
-    }
-    window.analytics?.identify(traits, {
       context: {
         ip: "0.0.0.0",
         page: {
@@ -78,6 +44,59 @@
           url: window.location.href,
         },
       },
+    };
+
+    await fetch("/api/analytics", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  };
+
+  export const trackPage = async (props: any) => {
+    if (!allowsAnalytics()) {
+      return;
+    }
+
+    const body: AnalyticsPayload = {
+      type: "page",
+      props: {
+        ...props,
+        authenticated: !!Cookies.get("gitpod-user"),
+      },
+      context: {
+        ip: "0.0.0.0",
+        page: props,
+      },
+    };
+
+    await fetch("/api/analytics", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  };
+
+  export const trackIdentity = async (
+    traits: any,
+    isStrictlyNecessary?: boolean
+  ) => {
+    if (!(allowsAnalytics() || isStrictlyNecessary)) {
+      return;
+    }
+    const body: AnalyticsPayload = {
+      type: "identity",
+      traits: traits,
+      context: {
+        ip: "0.0.0.0",
+        page: {
+          referrer: window.prevPages?.length == 2 ? window.prevPages[0] : "",
+          url: window.location.href,
+        },
+      },
+    };
+
+    await fetch("/api/analytics", {
+      method: "POST",
+      body: JSON.stringify(body),
     });
   };
 </script>
@@ -87,6 +106,7 @@
   import { page } from "$app/stores";
   import Cookies from "js-cookie";
   import { cookies } from "$lib/constants";
+  import type { AnalyticsPayload } from "../types/analytics";
 
   interface TrackWebsiteClick {
     path: string;
@@ -123,7 +143,7 @@
     }
   };
 
-  const trackButtonOrAnchor = (
+  const trackButtonOrAnchor = async (
     target:
       | HTMLAnchorElement
       | HTMLButtonElement
@@ -204,7 +224,7 @@
     if (trackingMsg.dnt) {
       return;
     }
-    trackEvent("website_clicked", trackingMsg);
+    await trackEvent("website_clicked", trackingMsg);
   };
 
   const writeKey =
@@ -295,7 +315,7 @@
     analytics.load(writeKey);
 
     // Track first page
-    trackPage({});
+    await trackPage({});
     window.prevPages = [window.location.href];
     window.addEventListener("click", handleButtonOrAnchorTracking, true);
 
@@ -309,7 +329,7 @@
         new URLSearchParams(window.location.search).get("track")
       );
       if (doTrack) {
-        trackEvent(
+        await trackEvent(
           window.location.pathname == "/extension-activation"
             ? "extension_installed"
             : "extension_uninstalled",
@@ -329,11 +349,12 @@
       trackPage({
         referrer: window.prevPages[window.prevPages.length - 1],
         url: window.location.href,
+      }).then(() => {
+        window.prevPages.push(window.location.href);
+        if (window.prevPages.length > 2) {
+          window.prevPages.shift();
+        }
       });
-      window.prevPages.push(window.location.href);
-      if (window.prevPages.length > 2) {
-        window.prevPages.shift();
-      }
     }
   }
 </script>
