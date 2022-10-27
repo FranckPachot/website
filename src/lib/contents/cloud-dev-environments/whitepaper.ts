@@ -3,7 +3,7 @@ import type { Host } from "$lib/types/host";
 export const Voices: Host[] = [
   {
     avatar: {
-      src: "/images/avatars/keith-adams.jpg",
+      src: "/images/avatars/kent-beck.png",
       alt: "Keith Adams Avatar",
     },
     jobTitle: "creator of Agile Manifesto & Test Driven Development",
@@ -12,7 +12,7 @@ export const Voices: Host[] = [
   },
   {
     avatar: {
-      src: "/images/avatars/keith-adams.jpg",
+      src: "/images/avatars/keith-adams.png",
       alt: "Keith Adams Avatar",
     },
     jobTitle: "xyz",
@@ -21,7 +21,7 @@ export const Voices: Host[] = [
   },
   {
     avatar: {
-      src: "/images/avatars/keith-adams.jpg",
+      src: "/images/avatars/tom-preston-werner.png",
       alt: "Keith Adams Avatar",
     },
     jobTitle: "Co-founder of GitHub",

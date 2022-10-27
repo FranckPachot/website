@@ -17,14 +17,14 @@
 
     <Download
       class="lgx:hidden"
-      toType="getting-started-with-nuaware"
+      toType="cde-whitepaper"
       eventType="Whitepaper"
     />
     <YoullLearn />
     <VoicesFromTheIndustry />
   </div>
   <Download
-    toType="getting-started-with-nuaware"
+    toType="cde-whitepaper"
     class="hidden lgx:block"
     eventType="Whitepaper"
   />
