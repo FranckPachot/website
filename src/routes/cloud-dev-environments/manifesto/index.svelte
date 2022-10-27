@@ -1,6 +1,7 @@
 <script lang="ts">
   import List from "$lib/components/cloud-dev-environments/manifesto/list.svelte";
   import Description from "$lib/components/cloud-dev-environments/manifesto/description.svelte";
+  import Testimonial from "$lib/components/testimonial.svelte";
   import Benefits from "$lib/components/cloud-dev-environments/manifesto/benefits.svelte";
 </script>
 
@@ -52,4 +53,16 @@
         "Cloud Development Environments are short-lived, which shortens the attack windows in which resources, secrets or infrastructure could be at risk. Because CDEs are ephemeral, secrets and other keys are inherently tightly scoped and short-lived, i.e. should they get compromised they would not be of much use for long. Continuous development environments are isolated from other work which reduces the impact of supply chain attacks. E.g. arbitrary code execution as part of a software build can only affect what’s in the CDE, and not everything that’s running on your laptop. ",
     },
   ]}
+/>
+
+<Testimonial
+  testimonial={{
+    avatar: "gitpod.jpg",
+    name: "Gitpod",
+    role: "CTO",
+    org: "Gitpod",
+    subtext:
+      "Using Gitpod will improve your feature velocity and drastically reduce your cycle times from commit to deploy.",
+  }}
+  grayscale={false}
 />

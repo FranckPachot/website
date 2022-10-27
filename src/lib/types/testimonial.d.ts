@@ -3,7 +3,8 @@ export type Testimonial = {
   avatar: string;
   org: string;
   role?: string;
-  text: string;
+  text?: string;
   img?: string;
   alt?: string;
+  subtext?: string;
 };
