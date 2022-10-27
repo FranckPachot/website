@@ -9,7 +9,7 @@ title: Gitpod public API
 
 # Gitpod public API
 
-> **⚠️ Warning:** Public API is currently in development and may change frequently before it reaches General Availability.
+> **⚠️ Warning:** The Public API is currently in active development. Gitpod may change the API contract **at any time** before the API is finally released as Generally Available. Use the API at your own risk. Also see [Release Cycle](/docs/help/public-roadmap/release-cycle) for the guarantees that Gitpod make for our features at various points in our release cycle. 
 
 ## About the Gitpod API
 
