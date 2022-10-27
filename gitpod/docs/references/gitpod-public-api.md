@@ -13,13 +13,13 @@ title: Gitpod public API
 
 ## About the Gitpod API
 
-It helps you to manage Gitpod Workspaces directly through gRPC APIs.
+It helps you to manage Gitpod Workspaces directly through gRPC APIs. Currently, all of the Authorization is on the server side, but it would be changed in future & will require a `authToken` (_coming soon_) to make an request to the APIs.
 
 # API Reference
 
 ## Workspaces
 
-> **⚠️ Warning:** JS/TS Clients requires atleast `Node 17`
+> **⚠️ Warning:** JS/TS Clients requires atleast [`Node 17`](https://nodejs.org/)
 
 - [List all workspaces](#list-all-workspaces)
 - [Get a workspace](#get-a-workspace)
@@ -35,25 +35,44 @@ It lists all the workspaces belongs to the authenticated user.
 
 **Request Parameters**:
 
-| Parameter                   | Description                                                   | Type  | Required |
-| --------------------------- | ------------------------------------------------------------- | ----- | -------- |
-| `pageSize`                  | It is maximum number of results we expect                     | Int32 | false    |
-| `fieldMask` (_coming soon_) | It used to specify a subset of fields that should be returned | Int32 | false    |
+| Parameter  |                Description                | Type  | Required |
+| :--------: | :---------------------------------------: | :---: | :------: |
+| `pageSize` | It is maximum number of results we expect | Int32 |  false   |
+
+<br>
 
 **Response Parameters**:
 
-| Parameter         | Description                                                                                                              | Type   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ |
-| `next_page_token` | Next Page Token                                                                                                          | string |
-| `workspaceId`     | Workspace Id                                                                                                             | string |
-| `ownerId`         | User Id                                                                                                                  | string |
-| `projectId`       | Project Id                                                                                                               | string |
-| `context`         | `contextUrl` with details of git or prebuild or snapshot                                                                 | string |
-| `status`          | will return Instance Id if currently assigned Instance Id to this workspace. Empty when there is no Instance Id assigned | string |
+|     Parameter     |                                                       Description                                                        |  Type  |
+| :---------------: | :----------------------------------------------------------------------------------------------------------------------: | :----: |
+| `next_page_token` |                                                     Next Page Token                                                      | string |
+|   `workspaceId`   |                                                       Workspace Id                                                       | string |
+|     `ownerId`     |                                                         User Id                                                          | string |
+|    `projectId`    |                                                        Project Id                                                        | string |
+|     `context`     |                                 `contextUrl` with details of git or prebuild or snapshot                                 | string |
+|     `status`      | will return Instance Id if currently assigned Instance Id to this workspace. Empty when there is no Instance Id assigned | string |
 
 ### Get a workspace
 
 It only returns a single workspace to the authenticated user.
+
+**Usage**: `getWorkspace()`
+
+**Request Parameters**:
+
+|   Parameter   | Description  |  Type  | Required |
+| :-----------: | :----------: | :----: | :------: |
+| `workspaceId` | Workspace Id | string |   true   |
+
+**Response Parameters**:
+
+|   Parameter   |                                                       Description                                                        |  Type  |
+| :-----------: | :----------------------------------------------------------------------------------------------------------------------: | :----: |
+| `workspaceId` |                                                       Workspace Id                                                       | string |
+|   `ownerId`   |                                                         User Id                                                          | string |
+|  `projectId`  |                                                        Project Id                                                        | string |
+|   `context`   |                                 `contextUrl` with details of git or prebuild or snapshot                                 | string |
+|   `status`    | will return Instance Id if currently assigned Instance Id to this workspace. Empty when there is no Instance Id assigned | string |
 
 ### Create & start workspace
 
