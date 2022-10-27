@@ -5,7 +5,7 @@
   import { Voices } from "$lib/contents/cloud-dev-environments/whitepaper";
 </script>
 
-<Section>
+<Section class="!mb-0">
   <h2 class="h3 mb-micro md:!mb-xx-small">Voices from the industry</h2>
   <div class="space-y-macro">
     {#each Voices as voice}
