@@ -94,13 +94,29 @@ It creates and start a new/ old workspace to the authenticated user.
 
 **Response Parameters**:
 
-|   Parameter   |                Description                |  Type  | Required |
-| :-----------: | :---------------------------------------: | :----: | :------: |
-| `workspaceId` | Workspace Id of created/started workspace | string |   true   |
+|   Parameter   |                Description                |  Type  |
+| :-----------: | :---------------------------------------: | :----: |
+| `workspaceId` | Workspace Id of created/started workspace | string |
 
 ### Get owner token
 
-It returns the owner token of authenticated user.
+It returns the owner token of a workspace.
+
+**Usage**: `getOwnerToken()`
+
+**Request Parameters**:
+
+|   Parameter   | Description  |  Type  | Required |
+| :-----------: | :----------: | :----: | :------: |
+| `workspaceId` | Workspace Id | string |   true   |
+
+<br>
+
+**Response Parameters**:
+
+| Parameter | Description |  Type  |
+| :-------: | :---------: | :----: |
+|  `token`  | Owner Token | string |
 
 #### Stop workspace
 
