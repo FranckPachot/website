@@ -121,3 +121,16 @@ It returns the owner token of a workspace.
 #### Stop workspace
 
 It stops a running workspace (instance).
+
+**Usage**: `stopWorkspace()`
+
+**Request Parameters**:
+
+|      Parameter      |                                Description                                 |  Type  | Required |
+| :-----------------: | :------------------------------------------------------------------------: | :----: | :------: |
+| `idempotencyToken ` | Token that is used by the server to identify and discard replayed requests | string |   true   |
+|    `workspaceId`    |                   Workspace Id that needs to be stopped                    | string |   true   |
+
+<br>
+
+**Response**: A message of Workspace Stopped.
