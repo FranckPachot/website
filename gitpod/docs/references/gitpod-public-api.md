@@ -64,6 +64,8 @@ It only returns a single workspace to the authenticated user.
 | :-----------: | :----------: | :----: | :------: |
 | `workspaceId` | Workspace Id | string |   true   |
 
+<br>
+
 **Response Parameters**:
 
 |   Parameter   |                                                       Description                                                        |  Type  |
@@ -77,6 +79,24 @@ It only returns a single workspace to the authenticated user.
 ### Create & start workspace
 
 It creates and start a new/ old workspace to the authenticated user.
+
+**Usage**: `createAndStartWorkspace()`
+
+**Request Parameters**:
+
+|     Parameter      |                                Description                                 |  Type  | Required |
+| :----------------: | :------------------------------------------------------------------------: | :----: | :------: |
+| `idempotencyToken` | Token that is used by the server to identify and discard replayed requests | string |   true   |
+|    `contextUrl`    |                 Context Url - git or prebuild or snapshot                  | string |   true   |
+|    `prebuildId`    |                       Prebuild Id if prebuild exists                       | string |  false   |
+
+<br>
+
+**Response Parameters**:
+
+|   Parameter   |                Description                |  Type  | Required |
+| :-----------: | :---------------------------------------: | :----: | :------: |
+| `workspaceId` | Workspace Id of created/started workspace | string |   true   |
 
 ### Get owner token
 
