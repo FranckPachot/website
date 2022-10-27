@@ -8,7 +8,7 @@
 </script>
 
 <Card size="small" background="white" class="max-w-[368px] p-x-small">
-  <div class="flex mb-x-small">
+  <div class="flex mb-xx-small">
     <div class="mr-micro">
       <GradientStrokeAvatar image={avatar} />
     </div>
