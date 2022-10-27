@@ -9,11 +9,21 @@ title: Gitpod public API
 
 # Gitpod public API
 
-> **⚠️ Warning:** The Public API is currently in active development. Gitpod may change the API contract **at any time** before the API is finally released as Generally Available. Use the API at your own risk. Also see [Release Cycle](/docs/help/public-roadmap/release-cycle) for the guarantees that Gitpod make for our features at various points in our release cycle. 
+> **⚠️ Warning:** The Public API is currently in active development. Gitpod may change the API contract **at any time** before the API is finally released as Generally Available. Use the API at your own risk. Also see [Release Cycle](/docs/help/public-roadmap/release-cycle) for the guarantees that Gitpod make for our features at various points in our release cycle.
 
 ## About the Gitpod API
 
 It helps you to manage Gitpod Workspaces directly through gRPC APIs. Currently, all of the Authorization is on the server side, but it would be changed in future & will require a `authToken` (_coming soon_) to make an request to the APIs.
+
+## Authentication
+
+Currently, Authentication is under development and will be coming soon.
+
+## Client libraries support
+
+Currently, We only support JavaScript/TypeScript (Node). But, we are looking to support for Go.
+
+---
 
 # API Reference
 
