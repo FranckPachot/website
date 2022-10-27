@@ -43,14 +43,14 @@ It lists all the workspaces belongs to the authenticated user.
 
 **Response Parameters**:
 
-|     Parameter     |                                                       Description                                                        |  Type  |
-| :---------------: | :----------------------------------------------------------------------------------------------------------------------: | :----: |
-| `next_page_token` |                                                     Next Page Token                                                      | string |
-|   `workspaceId`   |                                                       Workspace Id                                                       | string |
-|     `ownerId`     |                                                         User Id                                                          | string |
-|    `projectId`    |                                                        Project Id                                                        | string |
-|     `context`     |                                 `contextUrl` with details of git or prebuild or snapshot                                 | string |
-|     `status`      | will return Instance Id if currently assigned Instance Id to this workspace. Empty when there is no Instance Id assigned | string |
+|    Parameter    |                                                       Description                                                        |  Type  |
+| :-------------: | :----------------------------------------------------------------------------------------------------------------------: | :----: |
+| `nextPageToken` |                                                     Next Page Token                                                      | string |
+|  `workspaceId`  |                                                       Workspace Id                                                       | string |
+|    `ownerId`    |                                                         User Id                                                          | string |
+|   `projectId`   |                                                        Project Id                                                        | string |
+|    `context`    |                                 `contextUrl` with details of git or prebuild or snapshot                                 | string |
+|    `status`     | will return Instance Id if currently assigned Instance Id to this workspace. Empty when there is no Instance Id assigned | string |
 
 ### Get a workspace
 
