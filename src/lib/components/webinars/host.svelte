@@ -15,8 +15,10 @@
     <div>
       <h3 class="text-base mb-0">{name}</h3>
       <p class="text-base mb-macro">{jobTitle}</p>
-      <svelte:component this={companyLogo.component} {...companyLogo.props} />
+      {#if companyLogo}
+        <svelte:component this={companyLogo.component} {...companyLogo.props} />
+      {/if}
     </div>
   </div>
-  <p>{text}</p>
+  <p>{@html text}</p>
 </Card>
