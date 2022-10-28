@@ -35,7 +35,7 @@ Currently, We only support JavaScript/TypeScript (Node). But, we are looking to 
 - [Get a workspace](#get-a-workspace)
 - [Create & start workspace](#create--start-workspace)
 - [Get owner token](#get-owner-token)
-- [Start workspace](start-worksspace)
+- [Start workspace](#start-workspace)
 - [Stop workspace](#stop-workspace)
 
 ### List all workspaces
