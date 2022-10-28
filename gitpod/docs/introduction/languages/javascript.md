@@ -9,21 +9,23 @@ title: JavaScript in Gitpod
 
 # JavaScript in Gitpod
 
-Gitpod comes with great built-in support for JavaScript, TypeScript, and tools like Node.js, npm, and Yarn pre-installed. Still, depending on your project, you might want to further optimize the experience.
+Gitpod comes with great built-in support for JavaScript, TypeScript, and tools like Node.js, npm, & yarn pre-installed with [Gitpod workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image). This guide walks you through how to fully configure a JavaScript application using Gitpod.
 
-## Examples
+## Prerequisites
 
-Here are a few JavaScript example projects that are automated with Gitpod:
+This guide assumes familiarity with:
 
-<div class="overflow-x-auto">
+[Docker](https://docs.docker.com/), [YAML](https://yaml.org/spec/1.1/), [Linux](https://www.linux.org/), [Bash](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html) and Linux [environment variables](https://wiki.archlinux.org/title/environment_variables).
 
-| Repository                                                   | Description                                                                             | Try it                                                                                                                            |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| [Tesseract.js](https://github.com/naptha/tesseract.js)       | Pure JavaScript OCR for more than 100 Languages                                         | [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/naptha/tesseract.js)       |
-| [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) | [freeCodeCamp.org](https://www.freecodecamp.org/)'s open source codebase and curriculum | [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/freeCodeCamp/freeCodeCamp) |
-| [Mozilla PDF.js](https://github.com/mozilla/pdf.js)          | PDF.js is a PDF viewer that is built with HTML5                                         | [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mozilla/pdf.js)            |
+## Getting started / Quick Start
 
-</div>
+`youtube: w65POyu3ZUQ`
+
+To see a full working Node/TypeScript application, take a look at [gitpod-io/template-typescript-node](https://github.com/gitpod-io/template-typescript-node). To update an existing JavaScript application, follow the steps below in this guide.
+
+<a href="https://gitpod.io/#https://github.com/gitpod-io/template-typescript-node">
+    <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Push" align="center" >
+</a>
 
 ## Start tasks
 
