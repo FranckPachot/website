@@ -196,13 +196,7 @@ export const MENU: MenuEntry[] = [
   M(".gitpod.yml", "references/gitpod-yml"),
   M("IDEs & editors", "references/ides-and-editors", false, [
     M("VS Code Browser", "references/ides-and-editors/vscode-browser"),
-    M(
-      "VS Code Desktop",
-      "references/ides-and-editors/vscode",
-      false,
-      [],
-      "beta"
-    ),
+    M("VS Code Desktop", "references/ides-and-editors/vscode", false, []),
     M(
       "IntelliJ IDEA",
       "references/ides-and-editors/intellij",
