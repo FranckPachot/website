@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Hero from "$lib/components/cloud-dev-environments/whitepaper/hero.svelte";
-  import Download from "$lib/components/cloud-dev-environments/whitepaper/download.svelte";
-  import YoullLearn from "$lib/components/cloud-dev-environments/whitepaper/youll-learn.svelte";
-  import VoicesFromTheIndustry from "$lib/components/cloud-dev-environments/whitepaper/voices-from-the-industry.svelte";
+  import Hero from "$lib/components/whitepaper/cloud-dev-environments/hero.svelte";
+  import Download from "$lib/components/whitepaper/cloud-dev-environments/download.svelte";
+  import YoullLearn from "$lib/components/whitepaper/cloud-dev-environments/youll-learn.svelte";
+  import VoicesFromTheIndustry from "$lib/components/whitepaper/cloud-dev-environments/voices-from-the-industry.svelte";
   import Articles from "$lib/components/articles.svelte";
   import Explore from "$lib/components/explore.svelte";
 </script>
