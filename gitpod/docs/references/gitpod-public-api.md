@@ -35,6 +35,7 @@ Currently, We only support JavaScript/TypeScript (Node). But, we are looking to 
 - [Get a workspace](#get-a-workspace)
 - [Create & start workspace](#create--start-workspace)
 - [Get owner token](#get-owner-token)
+- [Start workspace](start-worksspace)
 - [Stop workspace](#stop-workspace)
 
 ### List all workspaces
@@ -88,7 +89,7 @@ It only returns a single workspace to the authenticated user.
 
 ### Create & start workspace
 
-It creates and start a new/ old workspace to the authenticated user.
+It creates and start a new workspace to the authenticated user.
 
 **Usage**: `createAndStartWorkspace()`
 
@@ -98,7 +99,7 @@ It creates and start a new/ old workspace to the authenticated user.
 | :----------------: | :------------------------------------------------------------------------: | :----: | :------: |
 | `idempotencyToken` | Token that is used by the server to identify and discard replayed requests | string |   true   |
 |    `contextUrl`    |                 Context Url - git or prebuild or snapshot                  | string |   true   |
-|    `prebuildId`    |                       Prebuild Id if prebuild exists                       | string |  false   |
+|    `prebuildId`    |                      Prebuild Id, if prebuild exists                       | string |  false   |
 
 <br>
 
@@ -128,7 +129,29 @@ It returns the owner token of a workspace.
 | :-------: | :---------: | :----: |
 |  `token`  | Owner Token | string |
 
-#### Stop workspace
+### Start workspace
+
+It starts an older workspace (instance).
+
+**Usage**: `startWorkspace()`
+
+**Request Parameters**:
+
+|      Parameter      |                                Description                                 |  Type  | Required |
+| :-----------------: | :------------------------------------------------------------------------: | :----: | :------: |
+| `idempotencyToken ` | Token that is used by the server to identify and discard replayed requests | string |   true   |
+|    `workspaceId`    |                   Workspace Id that needs to be stopped                    | string |   true   |
+
+<br>
+
+**Response Parameters**:
+
+|   Parameter    |         Description          |  Type  |
+| :------------: | :--------------------------: | :----: |
+|  `instanceId`  |         Instance Id          | string |
+| `workspaceUrl` | URL of the started workspace | string |
+
+### Stop workspace
 
 It stops a running workspace (instance).
 
