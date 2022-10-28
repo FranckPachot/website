@@ -4,6 +4,7 @@
 
   import { onMount } from "svelte";
   import type { comparisonItem } from "$lib/types/docs.type";
+  import { LocalStorageKeys } from "$lib/constants";
 
   export let items: comparisonItem[] = [
     {
@@ -35,13 +36,15 @@
 
   const rememberLastAccessed = (value: number) => {
     try {
-      localStorage.setItem("ide-toggle", items[activeValue - 1].slotName);
+      localStorage.setItem(
+        LocalStorageKeys.IDE_TOGGLE_PREFERENCE,
+        items[activeValue - 1].slotName
+      );
       const event = new StorageEvent("storage", {
-        key: "ide-toggle",
+        key: LocalStorageKeys.IDE_TOGGLE_PREFERENCE,
         newValue: items[activeValue - 1].slotName,
       });
       window.dispatchEvent(event);
-      console.log("ide-toggle", items[value].slotName);
     } catch {}
   };
 
@@ -58,7 +61,9 @@
 
   const updateFromLocalStorage = () => {
     try {
-      const lastAccessed = localStorage.getItem("ide-toggle");
+      const lastAccessed = localStorage.getItem(
+        LocalStorageKeys.IDE_TOGGLE_PREFERENCE
+      );
       if (lastAccessed && $$slots[lastAccessed]) {
         const item = items.find((item) => item.slotName === lastAccessed);
         if (item) {
@@ -70,11 +75,11 @@
 
   onMount(() => {
     updateFromLocalStorage();
-    window.addEventListener("ide-toggle", () => {
+    window.addEventListener(LocalStorageKeys.IDE_TOGGLE_PREFERENCE, () => {
       updateFromLocalStorage();
     });
     window.addEventListener("storage", (e: StorageEvent) => {
-      if (e.key === "ide-toggle") {
+      if (e.key === LocalStorageKeys.IDE_TOGGLE_PREFERENCE) {
         updateFromLocalStorage();
       }
     });
