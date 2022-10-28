@@ -34,7 +34,7 @@
   ];
   let activeValue = 1;
 
-  const rememberLastAccessed = (value: number) => {
+  const rememberLastAccessed = () => {
     try {
       localStorage.setItem(
         LocalStorageKeys.IDE_TOGGLE_PREFERENCE,
@@ -50,7 +50,7 @@
 
   const changeTab = (tabValue: number) => () => {
     activeValue = tabValue;
-    rememberLastAccessed(tabValue - 1);
+    rememberLastAccessed();
   };
 
   let ariaIds: any = { tab: {}, tabpanel: {} };
