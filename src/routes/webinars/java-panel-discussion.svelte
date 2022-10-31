@@ -47,7 +47,6 @@
 
         <div class="flex">
           <YoutubeEmbed
-            coverImage="/images/webinars/java-panel-discussion.png"
             title="Success and failure stories of Java developers shifting to remote"
             embedId="Tgb7CBoqoqg"
           />
@@ -83,7 +82,6 @@
 
         <div class="flex">
           <YoutubeEmbed
-            coverImage="/images/webinars/java-panel-discussion.png"
             title="Success and failure stories of Java developers shifting to remote"
             embedId="Tgb7CBoqoqg"
           />
