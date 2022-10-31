@@ -27,16 +27,25 @@ Currently, We only support JavaScript/TypeScript (Node). But, we are looking to 
 
 # API Reference
 
-## Workspaces
-
 > **⚠️ Warning:** JS/TS Clients requires atleast [`Node 17`](https://nodejs.org/)
 
-- [List all workspaces](#list-all-workspaces)
-- [Get a workspace](#get-a-workspace)
-- [Create & start workspace](#create--start-workspace)
-- [Get owner token](#get-owner-token)
-- [Start workspace](#start-workspace)
-- [Stop workspace](#stop-workspace)
+- [Workspaces](#workspaces)
+  - [List all workspaces](#list-all-workspaces)
+  - [Get a workspace](#get-a-workspace)
+  - [Create & start workspace](#create--start-workspace)
+  - [Get owner token](#get-owner-token)
+  - [Start workspace](#start-workspace)
+  - [Stop workspace](#stop-workspace)
+- [Teams (_Coming soon_)](#teams-coming-soon)
+  - [Create a team](#create-a-team)
+  - List all teams
+  - Get a team
+  - Update a team
+  - Delete a team
+
+---
+
+## Workspaces
 
 ### List all workspaces
 
@@ -95,11 +104,10 @@ It creates and start a new workspace to the authenticated user.
 
 **Request Parameters**:
 
-|     Parameter      |                                Description                                 |  Type  | Required |
-| :----------------: | :------------------------------------------------------------------------: | :----: | :------: |
-| `idempotencyToken` | Token that is used by the server to identify and discard replayed requests | string |   true   |
-|    `contextUrl`    |                 Context Url - git or prebuild or snapshot                  | string |   true   |
-|    `prebuildId`    |                      Prebuild Id, if prebuild exists                       | string |  false   |
+|  Parameter   |                Description                |  Type  | Required |
+| :----------: | :---------------------------------------: | :----: | :------: |
+| `contextUrl` | Context Url - git or prebuild or snapshot | string |   true   |
+| `prebuildId` |      Prebuild Id, if prebuild exists      | string |  false   |
 
 <br>
 
@@ -137,10 +145,9 @@ It starts an older workspace (instance).
 
 **Request Parameters**:
 
-|      Parameter      |                                Description                                 |  Type  | Required |
-| :-----------------: | :------------------------------------------------------------------------: | :----: | :------: |
-| `idempotencyToken ` | Token that is used by the server to identify and discard replayed requests | string |   true   |
-|    `workspaceId`    |                   Workspace Id that needs to be stopped                    | string |   true   |
+|   Parameter   |              Description              |  Type  | Required |
+| :-----------: | :-----------------------------------: | :----: | :------: |
+| `workspaceId` | Workspace Id that needs to be stopped | string |   true   |
 
 <br>
 
@@ -159,11 +166,37 @@ It stops a running workspace (instance).
 
 **Request Parameters**:
 
-|      Parameter      |                                Description                                 |  Type  | Required |
-| :-----------------: | :------------------------------------------------------------------------: | :----: | :------: |
-| `idempotencyToken ` | Token that is used by the server to identify and discard replayed requests | string |   true   |
-|    `workspaceId`    |                   Workspace Id that needs to be stopped                    | string |   true   |
+|   Parameter   |              Description              |  Type  | Required |
+| :-----------: | :-----------------------------------: | :----: | :------: |
+| `workspaceId` | Workspace Id that needs to be stopped | string |   true   |
 
 <br>
 
 **Response**: A message of Workspace Stopped.
+
+---
+
+## Teams (_Coming soon_)
+
+### Create a team
+
+It creates a team.
+
+**Usage**: `createTeam()`
+
+**Request Parameters**:
+
+| Parameter | Description |  Type  | Required |
+| :-------: | :---------: | :----: | :------: |
+|  `name `  |  Team name  | string |   true   |
+
+<br>
+
+**Response Parameters**:
+
+| Parameter |         Description          |  Type  |
+| :-------: | :--------------------------: | :----: |
+|   `id`    |         UUID of Team         | string |
+|  `name`   |         Name of team         | string |
+|  `slug`   | Short version of a Team name | string |
+| `members` |  List of members in a team   | array  |
