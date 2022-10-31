@@ -4,7 +4,7 @@
   export let benefits: ManifestoBenefit[];
 </script>
 
-<Section>
+<Section id="principles">
   <div class="mb-small md:mb-medium">
     <h2 class="text-center h2 mb-macro md:!mb-micro">
       The benefit for all software developers

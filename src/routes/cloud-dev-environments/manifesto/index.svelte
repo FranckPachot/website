@@ -8,7 +8,22 @@
   import Benefits from "$lib/components/cloud-dev-environments/manifesto/benefits.svelte";
   import Explore from "$lib/components/explore.svelte";
   import Whitepaper from "$lib/components/cloud-dev-environments/manifesto/whitepaper.svelte";
+  import Hero from "$lib/components/cloud-dev-environments/manifesto/hero.svelte";
 </script>
+
+<Hero
+  subtitle="Manifesto"
+  title="Cloud developer environments (CDEs)"
+  text="Unleash developer productivity and collaboration by supercharging how you develop."
+  image={{
+    src: "/images/cde/hero.png",
+    alt: "Spawning new developer environments on click",
+  }}
+  btnPrimary={{
+    text: "View 7 principles",
+    href: "#principles",
+  }}
+/>
 
 <Description />
 <List manifestoItems={ManifestoItems} />
