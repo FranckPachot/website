@@ -56,8 +56,8 @@
   </div>
   <img
     class="
-    py-x-small
-       xl:-translate-x-[23%] xl:-translate-y-[20%] xl:scale-150
+    transform
+      xl:-translate-y-[45%] xl:translate-[20%] xl:scale-[200%]
         max-w-lg
         -z-10 hidden
         lg:block {darkSrc ? 'dark:lg:hidden' : ''}
@@ -66,7 +66,7 @@
     {src}
     {alt}
   />
-  <!-- {#if darkSrc}
+  {#if darkSrc}
     <img
       class="
           max-w-lg
@@ -74,11 +74,10 @@
           dark:lg:block
           w-[35vw]
           transfrom
-          scale-[1.12]
-          xl:transform xl:translate-x-24 xl:translate-y-[20%] xl:scale-[1.66]'
+          xl:-translate-y-[45%] xl:translate-[20%] xl:scale-[200%]
         "
       src={darkSrc}
       {alt}
     />
-  {/if} -->
+  {/if}
 </Section>

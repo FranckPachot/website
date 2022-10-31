@@ -18,6 +18,7 @@
   image={{
     src: "/images/cde/hero.png",
     alt: "Spawning new developer environments on click",
+    darkSrc: "/images/cde/hero-dark.png",
   }}
   btnPrimary={{
     text: "View 7 principles",
