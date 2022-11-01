@@ -14,7 +14,7 @@
 <Section class="flex flex-col items-center justify-center w-full">
   <div class="mb-small md:mb-medium">
     <h2 class="text-center h2 mb-macro md:!mb-micro">
-      Cloud developer environments manifesto
+      Cloud development environments manifesto
     </h2>
 
     <p class="text-large text-center mx-auto">xyz</p>

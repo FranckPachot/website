@@ -13,11 +13,11 @@
 
 <Hero
   subtitle="Manifesto"
-  title="Cloud developer environments (CDEs)"
-  text="Unleash developer productivity and collaboration by supercharging how you develop."
+  title="Cloud development environments (CDEs)"
+  text="Unleash development productivity and collaboration by supercharging how you develop."
   image={{
     src: "/images/cde/hero.png",
-    alt: "Spawning new developer environments on click",
+    alt: "Spawning new development environments on click",
     darkSrc: "/images/cde/hero-dark.png",
   }}
   btnPrimary={{
