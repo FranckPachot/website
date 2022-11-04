@@ -274,6 +274,36 @@ mkdir -p /workspace/data && mongod --dbpath /workspace/data
 
 Note: Storing MongoDB's data inside `/workspace` ensures that it will get backed up and restored properly when you stop and restart a workspace, or share a snapshot.
 
+### YugabyteDB
+
+If your project uses PostgreSQL, you can test it on YugabyteDB (Open Source PostgreSQL-compatible Distributed SQL database) with the dedicated [YugabyteDB image](https://github.com/FranckPachot/workspace-images/blob/main/chunks/tool-yugabytedb/Dockerfile). Simply base your `.gitpod.dockerfile` on:
+
+```dockerfile
+FROM gitpod/workspace-yugabytedb
+```
+
+and call `ysqlsh` instead of `psql` and connect to port `5433` instead of `5432`.
+
+<br>
+
+This starts a single-node YugabyteDB server, and you can use the `ysqlsh` CLI like you would do with `psql`:
+
+```bash
+$ ysqlsh
+
+ysqlsh (11.2-YB-2.14.0.0-b0)
+Type "help" for help.
+
+yugabyte=# select * from yb_servers();
+
+   host    | port | num_connections | node_type | cloud  |   region    | zone  | public_ip 
+-----------+------+-----------------+-----------+--------+-------------+-------+-----------
+ 127.0.0.1 | 5433 |               0 | primary   | cloud1 | datacenter1 | rack1 | 127.0.0.1
+(1 row)
+
+yugabyte=# 
+```
+
 ## Getting a Virtual Desktop
 
 If your application needs to run a graphical UI, you might see an error like this:
