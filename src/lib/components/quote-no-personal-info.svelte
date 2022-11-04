@@ -35,7 +35,7 @@
         {alt}
         width="50"
         height="50"
-        class="rounded-full bg-bg aspect-square object-cover"
+        class="rounded-full bg-card aspect-square object-cover"
       />
     </div>
     <div class="ml-3">

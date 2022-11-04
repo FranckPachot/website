@@ -75,7 +75,10 @@
         isEmailSent = true;
         isSubmissionInProgress = false;
         setTimeout(() => {
-          sectionStart.scrollIntoView();
+          sectionStart.scrollIntoView({
+            block: "center",
+            inline: "center",
+          });
         });
       } else if (response.status === 409) {
         isSubmissionInProgress = false;
@@ -93,7 +96,7 @@
 >
   <div bind:this={sectionStart}>
     {#if isEmailSent}
-      <SubmissionSuccess title="Thanks for downloading" />
+      <SubmissionSuccess class="-mb-x-small" title="Thanks for downloading" />
     {:else}
       <form
         class="space-y-micro md:space-y-xx-small"

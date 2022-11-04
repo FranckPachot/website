@@ -22,7 +22,7 @@
   const { src, alt, darkSrc } = image;
 </script>
 
-<Section class="flex items-center justify-between text-center lg:text-left">
+<Section class="flex items-center justify-between text-left">
   <div class="text-box mx-auto lg:mx-0 max-w-[700px]">
     {#if subtitle}
       <p class="h5 font-bold text-sub mb-xx-small">{subtitle}</p>
@@ -31,7 +31,7 @@
     <p class="mx-auto lg:mx-0 max-w-lg text-large mb-x-small">
       {text}
     </p>
-    <ButtonsWrapper class="justify-center lg:justify-start">
+    <ButtonsWrapper class="justify-start">
       {#if btnPrimary}
         <LinkButton
           size="large"

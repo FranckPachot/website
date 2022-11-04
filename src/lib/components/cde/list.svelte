@@ -23,13 +23,13 @@
     </p>
   </div>
   <ol
-    class="list-outside columns-1 md:columns-2 gap-xx-large space-y-small py-0 p-medium"
+    class="list-outside columns-1 md:columns-2 gap-xx-large space-y-small py-0 pl-medium"
   >
     {#each manifestoItems as item}
       <li
         class="marker:mr-x-small marker:font-bold break-inside-avoid marker:text-primary marker:text-h4"
       >
-        <h3 class="!mb-macro lg:!mb-xx-small">
+        <h3 class="!mb-macro lg:!mb-micro">
           <span class="text-important">{@html item.heading} </span><span
             class="text-light-grey"
           >
