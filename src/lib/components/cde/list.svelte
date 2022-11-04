@@ -5,12 +5,6 @@
   export let manifestoItems: ManifestoListItem[];
 </script>
 
-<style lang="postcss">
-  ol {
-    list-style-type: decimal-leading-zero;
-  }
-</style>
-
 <Section
   id="principles"
   class="flex flex-col items-center justify-center w-full"
@@ -23,20 +17,23 @@
     </p>
   </div>
   <ol
-    class="list-outside columns-1 md:columns-2 gap-xx-large space-y-small py-0 pl-medium"
+    class="list-outside columns-1 md:columns-2 gap-x-x-large space-y-small py-0"
   >
-    {#each manifestoItems as item}
-      <li
-        class="marker:mr-x-small marker:font-bold break-inside-avoid marker:text-primary marker:text-h4"
-      >
-        <h3 class="!mb-macro lg:!mb-micro">
-          <span class="text-important">{@html item.heading} </span><span
-            class="text-light-grey"
-          >
-            {item.subHeading}</span
-          >
-        </h3>
-        <p class="text-p-large">{item.description}</p>
+    {#each manifestoItems as item, i}
+      <li class="break-inside-avoid flex">
+        <div class="mr-xx-small font-bold text-primary h3">
+          0{i + 1}
+        </div>
+        <div>
+          <h3 class="!mb-macro lg:!mb-micro">
+            <span class="text-important">{@html item.heading} </span><span
+              class="text-light-grey"
+            >
+              {item.subHeading}</span
+            >
+          </h3>
+          <p class="text-p-large">{item.description}</p>
+        </div>
       </li>
     {/each}
   </ol>
