@@ -16,7 +16,7 @@
     </p>
   </div>
   <ul
-    class="lg:space-y-medium gap-x-small space-y-x-small lg:gap-x-large columns-1 lg:columns-2"
+    class="lg:space-y-medium gap-x-small space-y-x-small lg:gap-x-x-large columns-1 lg:columns-2"
   >
     {#each benefits as benefit}
       <li class="break-inside-avoid">
